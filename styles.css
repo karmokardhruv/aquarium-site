@@ -1,0 +1,561 @@
+/* ================================
+   1) RESET SOME BASICS
+   ================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: #000;       /* pure black background */
+  color: #fff;                   /* white text */
+  font-family: "Product Sans", sans-serif;
+  scroll-behavior: smooth;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* ================================
+   2) HEADER
+   ================================ */
+.site-header {
+  width: 100%;
+  background-color: #000;        /* black */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 40px;            /* reduced padding for a tighter header */
+  z-index: 10;
+}
+
+/* ---- 2.1) Logo + Name Container ---- */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  font-size: 2.3rem;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  color: #fff;
+  position: relative;
+  top: 8px;
+  left: -15px;
+}
+
+.logo-img {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+
+.logo-text {
+  margin-left: 0.5rem;
+}
+
+.logo:hover .logo-text {
+  color: #efefef;
+}
+
+/* ---- 2.2) Navigation Menu ---- */
+.main-nav ul {
+  display: flex;
+  align-items: center;
+}
+
+.main-nav ul li {
+  margin-left: 20px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.main-nav ul li a {
+  display: inline-flex;
+  align-items: center;
+}
+
+.main-nav ul li a i {
+  font-size: 1.1rem;
+  margin-left: 4px;
+}
+
+/* ================================
+   3) FORCE‐VISIBLE SVG ICONS
+   (LinkedIn & GitHub)
+   ================================ */
+.icon-link .icon {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+  display: block;
+}
+
+.linkedin-link:hover .icon {
+  fill: #0077b5;
+}
+
+.github-link:hover .icon {
+  fill: #6A4BA7;
+}
+
+/* ================================
+   4) GRID OF IMAGES (HOME PAGE)
+   ================================ */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 300px;
+  gap: 0;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ================================
+   5) FOOTER
+   ================================ */
+.site-footer-bottom {
+  padding: 25px;
+  text-align: center;
+}
+
+.site-footer-bottom a {
+  color: #888;
+  text-decoration: none;
+  font-size: 1.2rem;
+  margin: 0 8px;
+  transition: color 0.2s;
+}
+
+.site-footer-bottom a:hover {
+  color: #fff;
+}
+
+.footer-copy {
+  margin-top: 40px;
+  color: #777;
+  font-size: 0.95rem;
+}
+
+/* ================================
+   6) COLORED UNDERLINES (only on text links)
+   ================================ */
+/* make room for the underline bar on text links */
+.site-header .main-nav a:not(.icon-link) {
+  position: relative;
+  padding-bottom: 4px;
+}
+
+/* hidden underline */
+.site-header .main-nav a:not(.icon-link)::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--underline-color, #fff);
+  transition: width 0.25s ease;
+}
+
+/* expand on hover or when active */
+.site-header .main-nav a:not(.icon-link):hover::after,
+.site-header .main-nav a:not(.icon-link).active::after {
+  width: 100%;
+}
+
+/* per‐menu custom colors */
+.nav-projects    a { --underline-color: #EFB920; }
+.nav-publications a { --underline-color: #e91e63; }
+.nav-about       a { --underline-color: #7CB82F; }
+.nav-resume      a { --underline-color: #8C68CB; }
+.nav-contact     a { --underline-color: #F47B16; }
+
+/* ================================
+   7) OPTIONAL RESPONSIVE TWEAKS
+   ================================ */
+/*
+@media (max-width: 1200px) { … }
+@media (max-width: 800px) { … }
+@media (max-width: 500px) { … }
+*/
+
+/* Responsive shell overrides */
+:root {
+  --bg: #000;
+  --panel: #111;
+  --line: #262626;
+  --text: #fff;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+main {
+  width: 100%;
+}
+
+img {
+  max-width: 100%;
+}
+
+.page-wrapper {
+  width: min(100%, 1600px);
+  margin: 0 auto;
+}
+
+.site-header {
+  position: relative;
+  gap: 1.5rem;
+  padding: 24px clamp(20px, 3vw, 40px);
+  z-index: 20;
+}
+
+.logo {
+  gap: 0.65rem;
+  min-width: 0;
+  font-size: clamp(1.45rem, 2vw + 0.5rem, 2.3rem);
+  letter-spacing: 0.08em;
+  top: 0;
+  left: 0;
+}
+
+.logo-img {
+  height: clamp(44px, 6vw, 60px);
+  flex-shrink: 0;
+}
+
+.logo-text {
+  margin-left: 0;
+  white-space: nowrap;
+}
+
+.nav-toggle {
+  display: none;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background-color: var(--panel);
+  color: var(--text);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-toggle:hover {
+  background-color: #1b1b1b;
+  border-color: #3a3a3a;
+}
+
+.nav-toggle:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+.nav-toggle-bar {
+  width: 20px;
+  height: 2px;
+  border-radius: 999px;
+  background-color: currentColor;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.site-header.nav-open .nav-toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.site-header.nav-open .nav-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.site-header.nav-open .nav-toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.main-nav ul {
+  gap: 18px;
+}
+
+.main-nav li {
+  margin-left: 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+}
+
+.main-nav a {
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-links {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.nav-social {
+  gap: 12px;
+}
+
+.nav-social li {
+  font-size: 1rem;
+}
+
+.nav-social a {
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-social a:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.icon-link .icon {
+  fill: currentColor;
+}
+
+.site-header .nav-links a:not(.icon-link) {
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.site-header .nav-links a:not(.icon-link)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--underline-color, #fff);
+  transition: width 0.25s ease;
+}
+
+.site-header .nav-links a:not(.icon-link):hover::after,
+.site-header .nav-links a:not(.icon-link).active::after {
+  width: 100%;
+}
+
+.grid-container {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: auto;
+  gap: 14px;
+  width: min(1500px, 100%);
+  margin: 0 auto;
+  padding: 0 clamp(16px, 3vw, 24px) clamp(32px, 6vw, 56px);
+}
+
+.grid-item {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 18px;
+  background-color: var(--panel);
+}
+
+.site-footer-bottom {
+  padding: 28px clamp(20px, 4vw, 40px) 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.footer-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+
+.site-footer-bottom a {
+  margin: 0;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.footer-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+
+.footer-icons a:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.footer-copy {
+  margin-top: 0;
+  line-height: 1.6;
+}
+
+@media (max-width: 1023px) {
+  .site-header {
+    padding: 20px clamp(18px, 3vw, 28px);
+  }
+
+  .main-nav {
+    gap: 18px;
+  }
+
+  .main-nav ul {
+    gap: 14px;
+  }
+
+  .main-nav li {
+    font-size: 0.82rem;
+  }
+
+  .grid-container {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+
+@media (max-width: 767px) {
+  .site-header {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 16px 18px;
+  }
+
+  .logo {
+    max-width: calc(100% - 64px);
+    font-size: 1.4rem;
+    letter-spacing: 0.04em;
+  }
+
+  .logo-text {
+    white-space: normal;
+    line-height: 1.1;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    margin-left: auto;
+  }
+
+  .main-nav {
+    display: block;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition:
+      max-height 0.25s ease,
+      opacity 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .site-header.nav-open .main-nav {
+    max-height: 75vh;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .main-nav .nav-links,
+  .main-nav .nav-social {
+    width: 100%;
+    background-color: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+  }
+
+  .main-nav .nav-links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 10px;
+  }
+
+  .main-nav .nav-links li {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+
+  .main-nav .nav-links a:not(.icon-link) {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+
+  .main-nav .nav-links a:not(.icon-link)::after {
+    display: none;
+  }
+
+  .main-nav .nav-links a:not(.icon-link):hover,
+  .main-nav .nav-links a:not(.icon-link).active {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .main-nav .nav-social {
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  .nav-social a {
+    width: 44px;
+    height: 44px;
+    background-color: rgba(255, 255, 255, 0.03);
+  }
+
+  .grid-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding: 0 14px 28px;
+  }
+
+  .grid-item {
+    aspect-ratio: 1 / 1;
+    border-radius: 14px;
+  }
+
+  .site-footer-bottom {
+    padding: 24px 16px 28px;
+    gap: 16px;
+  }
+
+  .footer-copy {
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Publications | Dhruv Karmokar</title>
+
+  <!-- ====== FAVICON ====== -->
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+  <link rel="shortcut icon" href="favicon_io/favicon.ico" type="image/x-icon">
+  <link rel="manifest" href="favicon_io/site.webmanifest">
+
+  <!-- 1) FONT-FACE (Now includes Italic) -->
+  <style>
+    @font-face {
+      font-family: "Product Sans";
+      src: url("fonts/Product Sans Regular.ttf") format("truetype");
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: "Product Sans";
+      src: url("fonts/Product Sans Bold.ttf") format("truetype");
+      font-weight: 700; font-style: normal; font-display: swap;
+    }
+    /* ADDED ITALIC FONT VARIANT */
+    @font-face {
+      font-family: "Product Sans";
+      src: url("fonts/Product Sans Italic.ttf") format("truetype");
+      font-weight: 400; font-style: italic; font-display: swap;
+    }
+  </style>
+
+  <!-- 2) LINK MAIN CSS -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- 3) FONT AWESOME -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <!-- ================== PAGE-SPECIFIC CSS for PUBLICATIONS PAGE ================== -->
+  <style>
+    /* --- SHARED STYLES (from about.html) --- */
+
+    .page-container {
+      display: grid;
+      grid-template-columns: minmax(240px, 280px) minmax(0, 1fr);
+      align-items: start;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: clamp(28px, 4vw, 48px) clamp(20px, 4vw, 32px) clamp(40px, 6vw, 64px);
+      gap: clamp(32px, 6vw, 72px);
+    }
+
+    .sidebar {
+      width: 100%;
+      max-width: 280px;
+      text-align: left;
+      margin-left: 0;
+    }
+
+    .headshot-wrapper {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #444;
+      border-radius: 12px;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .headshot-wrapper img {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .sidebar-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .sidebar-position {
+      font-size: 1rem;
+      color: #ccc;
+      margin-top: 4px;
+    }
+
+    .contact-list {
+      padding-left: 0;
+      margin-top: 24px;
+    }
+
+    .contact-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .contact-list li i {
+      color: #888;
+      width: 24px;
+      text-align: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .contact-list li a {
+      color: #ccc;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-list li a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .publications-content {
+      min-width: 0;
+      color: #eee;
+    }
+
+    .publications-content h1 {
+      font-size: clamp(2.2rem, 5vw, 2.7rem);
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .publications-content .intro-text {
+      margin-bottom: 30px;
+      font-size: 1.08rem;
+      line-height: 1.7;
+      color: #ddd;
+    }
+
+    .publications-content h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .publications-content hr {
+      border: 0;
+      height: 1px;
+      background-color: #444;
+      margin: 20px 0;
+    }
+
+    .publication-entry {
+      margin-bottom: 25px;
+      line-height: 1.65;
+    }
+
+    .publication-entry .year {
+      font-weight: 700;
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1.15rem;
+    }
+
+    .publication-entry .title {
+      font-size: 1.08rem;
+      display: inline-block;
+      margin-bottom: 8px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .publication-entry .authors,
+    .publication-entry .venue {
+      color: #ccc;
+      font-size: 1rem;
+    }
+
+    .publication-entry .venue {
+      display: block;
+      margin-top: 4px;
+      font-style: italic;
+    }
+
+    .publications-content .footnote {
+      margin-top: 40px;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    .publications-content a {
+      color: #29a9d6;
+      text-decoration: none;
+      border-bottom: 1px solid #62dafb44;
+    }
+
+    .publications-content a:hover {
+      color: #9aefff;
+      border-bottom-color: #9aefff;
+    }
+
+    @media (max-width: 1023px) {
+      .page-container {
+        grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .page-container {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 24px 18px 40px;
+      }
+
+      .sidebar {
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 320px;
+      }
+
+      .contact-list li {
+        justify-content: center;
+        text-align: left;
+      }
+
+      .publications-content h1,
+      .publications-content h2 {
+        text-align: center;
+      }
+
+      .publications-content h2 {
+        font-size: 1.5rem;
+      }
+
+      .publications-content .intro-text {
+        font-size: 1rem;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <!-- =============== HEADER (PUBLICATIONS is now active) =============== -->
+  <header class="site-header">
+    <a href="index.html" class="logo">
+      <img src="images/dhruv-logo.png" alt="Dhruv Karmokar" class="logo-img" />
+      <span class="logo-text">Dhruv Karmokar</span>
+    </a>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-nav"
+      aria-label="Open navigation menu"
+    >
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+
+    <nav class="main-nav" id="site-nav" aria-label="Primary">
+      <ul class="nav-links">
+        <li class="nav-projects"><a href="index.html#projects">PROJECTS</a></li>
+        <li class="nav-publications"><a href="publications.html" class="active">PUBLICATIONS</a></li>
+        <li class="nav-about"><a href="about.html">ABOUT</a></li>
+        <li class="nav-resume"><a href="resume.html">RESUME</a></li>
+        <li class="nav-contact"><a href="contact.html">CONTACT</a></li>
+      </ul>
+
+      <ul class="nav-social">
+        <li>
+          <a
+            aria-label="LinkedIn Profile"
+            class="icon-link linkedin-link"
+            href="https://www.linkedin.com/in/karmokardhruv/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg class="icon" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+        </li>
+        <li>
+          <a
+            aria-label="GitHub Profile"
+            class="icon-link github-link"
+            href="https://github.com/karmokardhruv"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg class="icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="page-container">
+    <!-- ===== LEFT SIDEBAR (Copied directly from about.html) ===== -->
+    <aside class="sidebar">
+      <div class="headshot-wrapper">
+        <img src="images/dhruv-headshot.jpg" alt="Dhruv Karmokar" />
+      </div>
+      <div class="sidebar-name">Dhruv Karmokar</div>
+      <div class="sidebar-position">B.Tech, Computer Science | VIT Chennai</div>
+      <ul class="contact-list">
+        <li><i class="fa-solid fa-location-dot"></i> Thane, India</li>
+        <li><i class="fa-brands fa-instagram"></i> <a href="https://instagram.com/karmokardhruv" target="_blank">Instagram</a></li>
+        <li><i class="fa-brands fa-x-twitter"></i> <a href="https://x.com/karmokardhruv" target="_blank">X (Twitter)</a></li>
+        <li><i class="fa-brands fa-youtube"></i> <a href="https://youtube.com/@karmokardhruv" target="_blank">YouTube</a></li>
+        <li><i class="fa-solid fa-graduation-cap"></i> <a href="https://scholar.google.com/citations?user=qImi6RMAAAAJ&hl" target="_blank">Google Scholar</a></li>
+        <li><i class="fa-brands fa-orcid"></i> <a href="https://orcid.org/0009-0003-7108-7852" target="_blank">ORCID</a></li>
+      </ul>
+    </aside>
+
+    <!-- ===== RIGHT SIDE: Publications List ===== -->
+    <section class="publications-content">
+        <h1>Publications</h1>
+        <p class="intro-text">
+            You can also find my articles on my <a href="https://scholar.google.com/citations?user=qImi6RMAAAAJ&hl" target="_blank">Google Scholar profile</a>.
+        </p>
+
+        <h2>Journal Publications</h2>
+        <hr/>
+        <div class="publication-entry">
+            <span class="year">2025</span>
+            <a class="title" href="https://ieeexplore.ieee.org/abstract/document/11003144" target="_blank">Fusion of Multimodal Audio Data for Enhanced Speaker Identification Using Kolmogorov-Arnold Networks</a>
+            <p class="authors">Aryaman Tamotia*, <strong>Dhruv Shantu Karmokar*</strong>, Rethi Komal*, K Khadar Nawas†, A Shahina, A Nayeemulla Khan</p>
+            <em class="venue">IEEE Access (2025) (accepted)</em>
+        </div>
+
+        <h2>Conference Paper</h2>
+        <hr/>
+        <div class="publication-entry">
+            <span class="year">2023</span>
+            <a class="title" href="https://ieeexplore.ieee.org/abstract/document/10434693" target="_blank">Facilitating Fingerprint-Based Door Automation System Using RFID and Bluetooth</a>
+            <p class="authors">A. Sherly Alphonse†, Chitranshu Gupta, Mohammad Kamran Warsi, <strong>Dhruv Shantu Karmokar*</strong>, Aryaman Tamotia*</p>
+            <p class="venue">Innovations in Power and Advanced Computing Technologies (i-PACT) (pp. 1-5). IEEE (2023)</p>
+        </div>
+
+        <p class="footnote">* equal contribution, † corresponding author</p>
+    </section>
+  </main>
+
+<footer class="site-footer-bottom">
+  <!-- A div to group the icons -->
+  <div class="footer-icons">
+    <a href="https://www.linkedin.com/in/karmokardhruv" target="_blank" aria-label="LinkedIn Profile">
+      <i class="fa-brands fa-linkedin"></i>
+    </a>
+    <a href="https://github.com/karmokardhruv" target="_blank" aria-label="GitHub Profile">
+      <i class="fa-brands fa-github"></i>
+    </a>
+    <a href="https://x.com/karmokardhruv" target="_blank" aria-label="X (Twitter) Profile">
+      <i class="fa-brands fa-x-twitter"></i>
+    </a>
+    <a href="https://instagram.com/karmokardhruv" target="_blank" aria-label="Instagram Profile">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+    <a href="https://www.youtube.com/@karmokardhruv" target="_blank" aria-label="YouTube Channel">
+      <i class="fa-brands fa-youtube"></i>
+    </a>
+  </div>
+  <!-- A separate div for the copyright text -->
+  <div class="footer-copy">Copyright © 2025 Dhruv Karmokar. All rights reserved</div>
+</footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
