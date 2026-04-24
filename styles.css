@@ -1,4 +1,22 @@
 /* ================================
+   0) CSS VARIABLES
+   ================================ */
+:root {
+  --accent-cyan: #00f4fe;
+  --accent-purple: #bf81ff;
+  --border-muted: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.2);
+  --ease-fashion: cubic-bezier(0.25, 1, 0.5, 1);
+  --bg: #000;
+  --panel: #111;
+  --line: #262626;
+  --text: #fff;
+  --surface-low: #111;
+  --surface-high: #1c1c1c;
+  --text-secondary: #8a8a8a;
+}
+
+/* ================================
    1) RESET SOME BASICS
    ================================ */
 * {
@@ -9,11 +27,11 @@
 
 html,
 body {
-  height: 100%;
   background-color: #000;       /* pure black background */
   color: #fff;                   /* white text */
   font-family: "Product Sans", sans-serif;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 ul {
@@ -26,43 +44,48 @@ a {
 }
 
 /* ================================
-   2) HEADER
+   2) HEADER — Floating Glassmorphism Pill
    ================================ */
 .site-header {
-  width: 100%;
-  background-color: #000;        /* black */
+  position: fixed;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1000px;
+  background: rgba(18, 18, 18, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 25px 40px;            /* reduced padding for a tighter header */
-  z-index: 10;
+  padding: 12px 24px;
+  border-radius: 50px;
+  border: 1px solid var(--border-muted);
+  z-index: 1000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s var(--ease-fashion);
 }
 
 /* ---- 2.1) Logo + Name Container ---- */
 .logo {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  font-size: 2.3rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  letter-spacing: 1.4px;
+  letter-spacing: 0.1em;
   color: #fff;
-  position: relative;
-  top: 8px;
-  left: -15px;
 }
 
 .logo-img {
-  height: 60px;
+  height: 35px;
   width: auto;
-  display: block;
+  margin-right: 12px;
 }
 
 .logo-text {
-  margin-left: 0.5rem;
+  margin-left: 0;
+  white-space: nowrap;
 }
 
 .logo:hover .logo-text {
@@ -73,42 +96,23 @@ a {
 .main-nav ul {
   display: flex;
   align-items: center;
+  gap: 25px;
 }
 
-.main-nav ul li {
-  margin-left: 20px;
-  font-size: 0.9rem;
+.main-nav a {
+  font-size: 0.85rem;
   text-transform: uppercase;
   font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.05em;
+  position: relative;
+  transition: color 0.3s var(--ease-fashion);
+  padding: 5px 0;
 }
 
-.main-nav ul li a {
-  display: inline-flex;
-  align-items: center;
-}
-
-.main-nav ul li a i {
-  font-size: 1.1rem;
-  margin-left: 4px;
-}
-
-/* ================================
-   3) FORCE‐VISIBLE SVG ICONS
-   (LinkedIn & GitHub)
-   ================================ */
-.icon-link .icon {
-  width: 20px;
-  height: 20px;
-  fill: #fff;
-  display: block;
-}
-
-.linkedin-link:hover .icon {
-  fill: #0077b5;
-}
-
-.github-link:hover .icon {
-  fill: #6A4BA7;
+.main-nav a:hover,
+.main-nav a.active {
+  color: #fff;
 }
 
 /* ================================
@@ -183,6 +187,7 @@ a {
 }
 
 /* per‐menu custom colors */
+.nav-home        a { --underline-color: #00f4fe; }
 .nav-projects    a { --underline-color: #EFB920; }
 .nav-publications a { --underline-color: #e91e63; }
 .nav-about       a { --underline-color: #7CB82F; }
@@ -199,12 +204,6 @@ a {
 */
 
 /* Responsive shell overrides */
-:root {
-  --bg: #000;
-  --panel: #111;
-  --line: #262626;
-  --text: #fff;
-}
 
 body {
   min-height: 100vh;
@@ -222,54 +221,30 @@ img {
 .page-wrapper {
   width: min(100%, 1600px);
   margin: 0 auto;
+  padding-top: 90px; /* Space for the fixed floating header */
 }
 
-.site-header {
-  position: relative;
-  gap: 1.5rem;
-  padding: 24px clamp(20px, 3vw, 40px);
-  z-index: 20;
-}
-
-.logo {
-  gap: 0.65rem;
-  min-width: 0;
-  font-size: clamp(1.45rem, 2vw + 0.5rem, 2.3rem);
-  letter-spacing: 0.08em;
-  top: 0;
-  left: 0;
-}
-
-.logo-img {
-  height: clamp(44px, 6vw, 60px);
-  flex-shrink: 0;
-}
-
-.logo-text {
-  margin-left: 0;
-  white-space: nowrap;
-}
-
+/* Nav toggle (hamburger) — hidden on desktop */
 .nav-toggle {
   display: none;
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   padding: 0;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background-color: var(--panel);
+  border: 1px solid var(--border-muted);
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.08);
   color: var(--text);
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
   cursor: pointer;
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .nav-toggle:hover {
-  background-color: #1b1b1b;
-  border-color: #3a3a3a;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: var(--border-hover);
 }
 
 .nav-toggle:focus-visible {
@@ -278,7 +253,7 @@ img {
 }
 
 .nav-toggle-bar {
-  width: 20px;
+  width: 16px;
   height: 2px;
   border-radius: 999px;
   background-color: currentColor;
@@ -286,7 +261,7 @@ img {
 }
 
 .site-header.nav-open .nav-toggle-bar:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
+  transform: translateY(6px) rotate(45deg);
 }
 
 .site-header.nav-open .nav-toggle-bar:nth-child(2) {
@@ -294,61 +269,10 @@ img {
 }
 
 .site-header.nav-open .nav-toggle-bar:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
+  transform: translateY(-6px) rotate(-45deg);
 }
 
-.main-nav {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-
-.main-nav ul {
-  gap: 18px;
-}
-
-.main-nav li {
-  margin-left: 0;
-  font-size: 0.9rem;
-  letter-spacing: 0.08em;
-}
-
-.main-nav a {
-  display: inline-flex;
-  align-items: center;
-}
-
-.nav-links {
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
-.nav-social {
-  gap: 12px;
-}
-
-.nav-social li {
-  font-size: 1rem;
-}
-
-.nav-social a {
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  transition: color 0.2s ease, background-color 0.2s ease;
-}
-
-.nav-social a:hover {
-  background-color: rgba(255, 255, 255, 0.08);
-}
-
-.icon-link .icon {
-  fill: currentColor;
-}
-
+/* Main nav links underline (duplicate removed — already in section 6) */
 .site-header .nav-links a:not(.icon-link) {
   position: relative;
   padding-bottom: 4px;
@@ -426,19 +350,16 @@ img {
 
 @media (max-width: 1023px) {
   .site-header {
-    padding: 20px clamp(18px, 3vw, 28px);
-  }
-
-  .main-nav {
-    gap: 18px;
+    width: 95%;
+    padding: 10px 20px;
   }
 
   .main-nav ul {
     gap: 14px;
   }
 
-  .main-nav li {
-    font-size: 0.82rem;
+  .main-nav a {
+    font-size: 0.78rem;
   }
 
   .grid-container {
@@ -450,19 +371,15 @@ img {
 @media (max-width: 767px) {
   .site-header {
     flex-wrap: wrap;
-    gap: 12px;
-    padding: 16px 18px;
+    border-radius: 20px;
+    padding: 12px 18px;
+    top: 10px;
+    width: 95%;
   }
 
   .logo {
-    max-width: calc(100% - 64px);
-    font-size: 1.4rem;
-    letter-spacing: 0.04em;
-  }
-
-  .logo-text {
-    white-space: normal;
-    line-height: 1.1;
+    max-width: calc(100% - 56px);
+    font-size: 1rem;
   }
 
   .nav-toggle {
@@ -491,19 +408,16 @@ img {
     transform: translateY(0);
   }
 
-  .main-nav .nav-links,
-  .main-nav .nav-social {
-    width: 100%;
-    background-color: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 18px;
-  }
-
   .main-nav .nav-links {
     flex-direction: column;
     align-items: stretch;
     gap: 0;
     padding: 10px;
+    width: 100%;
+    background-color: rgba(18, 18, 18, 0.8);
+    border: 1px solid var(--border-muted);
+    border-radius: 18px;
+    margin-top: 10px;
   }
 
   .main-nav .nav-links li {
@@ -526,19 +440,6 @@ img {
     background-color: rgba(255, 255, 255, 0.08);
   }
 
-  .main-nav .nav-social {
-    justify-content: center;
-    gap: 10px;
-    padding: 10px;
-    margin-top: 10px;
-  }
-
-  .nav-social a {
-    width: 44px;
-    height: 44px;
-    background-color: rgba(255, 255, 255, 0.03);
-  }
-
   .grid-container {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
@@ -558,4 +459,661 @@ img {
   .footer-copy {
     font-size: 0.9rem;
   }
+}
+
+
+/* ================================
+   AQUARIUM: Canvas Container
+   ================================ */
+#aquarium-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+}
+
+#aquarium-container canvas {
+  pointer-events: auto;
+}
+
+/* ================================
+   AQUARIUM: Video Background
+   ================================ */
+.video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.video-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(to bottom, transparent, #000);
+  z-index: 2;
+}
+
+.bg-video {
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  transition: opacity 1.5s var(--ease-fashion);
+}
+
+/* Night theme by default */
+#bg-video-day {
+  opacity: 0;
+}
+#bg-video-night {
+  opacity: 1;
+  top: -150px;
+}
+
+body[data-theme="day"] #bg-video-day {
+  opacity: 1;
+}
+body[data-theme="day"] #bg-video-night {
+  opacity: 0;
+}
+
+/* ================================
+   AQUARIUM: Floating Buttons
+   ================================ */
+.float-btn {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(18, 18, 18, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-muted);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s var(--ease-fashion);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.float-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+}
+
+.float-btn.active {
+  background: #fff;
+  color: #000;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+/* ================================
+   AQUARIUM: Floating Theme Toggle (top-right corner)
+   ================================ */
+.top-right {
+  top: 20px;
+  right: 20px;
+  position: fixed;
+}
+
+body[data-theme="day"] .float-btn.top-right {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #121212;
+}
+
+body[data-theme="day"] .float-btn.top-right:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--accent-cyan);
+}
+
+.bottom-right-controls {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 1000;
+}
+
+.bottom-right-controls .float-btn {
+  position: relative;
+}
+
+.feed-btn {
+  position: relative;
+  width: auto;
+  padding: 0 20px;
+  border-radius: 25px;
+  font-family: inherit;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.9rem;
+  gap: 8px;
+}
+
+/* ================================
+   AQUARIUM: Footer with Gradient
+   ================================ */
+.aquarium-footer-gradient {
+  margin-top: calc(100vh - 60px);
+  height: 150px;
+  background: linear-gradient(to bottom, transparent, #000);
+  pointer-events: none;
+  position: relative;
+  z-index: 10;
+}
+
+.aquarium-footer {
+  background: #000;
+  padding: 20px 20px 80px;
+  position: relative;
+  z-index: 10;
+}
+
+.social-list-horizontal {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.social-list-horizontal a {
+  color: #888;
+  font-size: 2rem;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.social-list-horizontal a:hover {
+  color: var(--accent-cyan);
+  transform: scale(1.1);
+}
+
+/* ================================
+   AQUARIUM: Day/Night Theme Overrides
+   ================================ */
+body[data-theme="day"] .float-btn {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #121212;
+}
+
+body[data-theme="day"] .float-btn:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--accent-cyan);
+}
+
+/* ================================
+   HEADER: Theme-aware glassmorphism
+   ================================ */
+
+/* Night mode: dark translucent pill */
+body[data-theme="night"] .site-header {
+  background: rgba(5, 5, 15, 0.55);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Day mode: light translucent pill */
+body[data-theme="day"] .site-header {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="day"] .site-header a,
+body[data-theme="day"] .site-header .logo {
+  color: #121212;
+}
+
+body[data-theme="day"] .main-nav a {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+body[data-theme="day"] .main-nav a:hover,
+body[data-theme="day"] .main-nav a.active {
+  color: #121212;
+}
+
+body[data-theme="day"] .nav-toggle-bar {
+  background-color: #121212;
+}
+
+
+
+/* ================================
+   FIX: Scrollbar gap — ensure no horizontal overflow
+   ================================ */
+html {
+  overflow-x: hidden;
+  width: 100vw;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* ================================
+   SITE-WIDE LIGHT MODE (day theme)
+   All pages: white bg, dark text, light cards
+   ================================ */
+body[data-theme="day"] {
+  background-color: #f5f5f7 !important;
+  color: #1d1d1f !important;
+}
+
+/* --- Header in light mode --- */
+body[data-theme="day"] .site-header .nav-links a:not(.icon-link) {
+  color: #444;
+}
+
+body[data-theme="day"] .site-header .nav-links a:not(.icon-link):hover,
+body[data-theme="day"] .site-header .nav-links a:not(.icon-link).active {
+  color: #1d1d1f;
+}
+
+/* --- Footer in light mode --- */
+body[data-theme="day"] .site-footer-bottom {
+  background-color: #eee;
+}
+
+body[data-theme="day"] .site-footer-bottom a {
+  color: #666;
+}
+
+body[data-theme="day"] .site-footer-bottom a:hover {
+  color: #1d1d1f;
+}
+
+body[data-theme="day"] .footer-copy {
+  color: #888;
+}
+
+body[data-theme="day"] .footer-icons a:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+/* --- Links in light mode --- */
+body[data-theme="day"] a {
+  color: #1d1d1f;
+}
+
+/* --- About page light mode --- */
+body[data-theme="day"] .about-name,
+body[data-theme="day"] .about-content h1 {
+  color: #1d1d1f;
+}
+
+body[data-theme="day"] .about-position {
+  color: #666;
+}
+
+body[data-theme="day"] .about-content p {
+  color: #444;
+}
+
+body[data-theme="day"] .about-content p strong {
+  color: #1d1d1f;
+}
+
+body[data-theme="day"] .contact-list li {
+  color: #444;
+}
+
+body[data-theme="day"] .contact-list li i {
+  color: #888;
+}
+
+body[data-theme="day"] .contact-list li a {
+  color: #555;
+}
+
+body[data-theme="day"] .contact-list li a:hover {
+  color: #1d1d1f;
+}
+
+body[data-theme="day"] .headshot-wrapper {
+  border-color: #ddd;
+}
+
+/* --- Publications page light mode --- */
+body[data-theme="day"] .sidebar-name,
+body[data-theme="day"] .publications-content h1,
+body[data-theme="day"] .publications-content h2 {
+  color: #1d1d1f;
+}
+
+body[data-theme="day"] .sidebar-position {
+  color: #666;
+}
+
+body[data-theme="day"] .publications-content .intro-text,
+body[data-theme="day"] .publication-entry .authors,
+body[data-theme="day"] .publication-entry .venue {
+  color: #555;
+}
+
+body[data-theme="day"] .publications-content hr {
+  background-color: #ddd;
+}
+
+body[data-theme="day"] .publications-content a {
+  color: #0066cc;
+  border-bottom-color: rgba(0, 102, 204, 0.3);
+}
+
+body[data-theme="day"] .publications-content a:hover {
+  color: #004499;
+}
+
+body[data-theme="day"] .publications-content .footnote {
+  color: #888;
+}
+
+/* --- Resume page light mode --- */
+body[data-theme="day"] .resume-name {
+  color: #1d1d1f;
+}
+
+body[data-theme="day"] .resume-number {
+  color: #1d1d1f;
+}
+
+body[data-theme="day"] .resume-contact {
+  color: #555;
+}
+
+body[data-theme="day"] .resume-contact a {
+  color: #555;
+}
+
+body[data-theme="day"] .resume-contact a:hover {
+  color: #1d1d1f;
+}
+
+body[data-theme="day"] .resume-section h2 {
+  color: #1d1d1f;
+  border-bottom-color: #ddd;
+}
+
+body[data-theme="day"] .entry-title {
+  color: #1d1d1f;
+}
+
+body[data-theme="day"] .entry-title a {
+  color: #0066cc;
+}
+
+body[data-theme="day"] .entry-title a:hover {
+  color: #004499;
+}
+
+body[data-theme="day"] .entry-subtitle {
+  color: #555;
+}
+
+body[data-theme="day"] .entry-meta {
+  color: #777;
+}
+
+body[data-theme="day"] .entry-details {
+  color: #555;
+}
+
+body[data-theme="day"] .entry-details strong {
+  color: #1d1d1f;
+}
+
+body[data-theme="day"] .skills-list {
+  color: #555;
+}
+
+body[data-theme="day"] .skills-list strong {
+  color: #1d1d1f;
+}
+
+body[data-theme="day"] .resume-container {
+  color: #444;
+}
+
+/* --- Contact page light mode --- */
+body[data-theme="day"] .contact-container {
+  background-color: #f5f5f7;
+}
+
+body[data-theme="day"] .page-wrapper {
+  background-color: #f5f5f7;
+}
+
+/* --- Aquarium footer light mode --- */
+body[data-theme="day"] .aquarium-footer {
+  background: #f5f5f7;
+}
+
+body[data-theme="day"] .aquarium-footer-gradient {
+  background: linear-gradient(to bottom, transparent, #f5f5f7);
+}
+
+body[data-theme="day"] .aquarium-footer .footer-icons a {
+  color: #888;
+}
+
+body[data-theme="day"] .aquarium-footer .footer-icons a:hover {
+  color: #0066cc;
+}
+
+body[data-theme="day"] .aquarium-footer .footer-copy {
+  color: #888 !important;
+}
+
+/* --- Video container gradient light mode --- */
+body[data-theme="day"] .video-container::after {
+  background: linear-gradient(to bottom, transparent, #f5f5f7);
+}
+
+/* --- Mobile nav panel light mode --- */
+@media (max-width: 767px) {
+  body[data-theme="day"] .main-nav .nav-links,
+  body[data-theme="day"] .main-nav .nav-social {
+    background-color: #fff;
+    border-color: #ddd;
+  }
+
+  body[data-theme="day"] .main-nav .nav-links a:not(.icon-link):hover,
+  body[data-theme="day"] .main-nav .nav-links a:not(.icon-link).active {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  body[data-theme="day"] .nav-social a {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+
+  body[data-theme="day"] .nav-toggle {
+    background-color: #fff;
+    border-color: #ddd;
+  }
+
+  body[data-theme="day"] .nav-toggle:hover {
+    background-color: #f0f0f0;
+  }
+}
+/* ================================
+   UI COMPONENTS (BENTO / CARDS)
+   ================================ */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+}
+
+.bento-card {
+  background-color: var(--surface-low);
+  border: 1px solid var(--border-muted);
+  border-radius: 24px;
+  padding: 30px;
+  transition: all 0.4s var(--ease-fashion);
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-card:hover {
+  background-color: var(--surface-high);
+  border-color: var(--border-hover);
+  transform: translateY(-5px);
+}
+
+.bento-col-4 { grid-column: span 4; }
+.bento-col-6 { grid-column: span 6; }
+.bento-col-8 { grid-column: span 8; }
+.bento-col-12 { grid-column: span 12; }
+
+@media (max-width: 768px) {
+  .bento-col-4, .bento-col-6, .bento-col-8 {
+    grid-column: span 12;
+  }
+}
+
+/* Tag Pill */
+.tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  background: rgba(0, 244, 254, 0.1);
+  padding: 6px 14px;
+  border-radius: 50px;
+  margin-bottom: 15px;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text-primary, var(--text));
+}
+
+.card-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+/* Base Button */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--text-primary, var(--text));
+  color: var(--bg);
+  padding: 14px 28px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s var(--ease-fashion), background 0.3s var(--ease-fashion);
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  background: var(--accent-cyan);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: var(--text-primary, var(--text));
+  padding: 14px 28px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 50px;
+  border: 1px solid var(--border-hover);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-fashion);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255,255,255,0.05);
+  transform: scale(1.05);
+  border-color: var(--text-primary, var(--text));
+}
+
+/* Divider */
+.divider-layout {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 60px 0 40px;
+}
+
+.divider-title {
+  font-size: 4rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.1);
+  line-height: 1;
+}
+
+.divider-line {
+  height: 1px;
+  flex-grow: 1;
+  background: var(--border-muted);
+}
+
+body[data-theme="day"] {
+  --surface-low: #fff;
+  --surface-high: #f0f0f0;
+  --text-secondary: #555;
+  --border-muted: rgba(0, 0, 0, 0.1);
+  --border-hover: rgba(0, 0, 0, 0.2);
+}
+
+body[data-theme="day"] .divider-title {
+  color: rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="day"] .btn-secondary:hover {
+  background-color: rgba(0,0,0,0.05);
+}
+
+/* ================================
+   PROJECTS CONTAINER
+   ================================ */
+.projects-container {
+  padding-top: 140px; /* Space for fixed floating nav */
+  padding-bottom: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 80vh;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
 }
