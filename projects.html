@@ -24,9 +24,84 @@
 
   <!-- FONT AWESOME -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    /* Theme overrides for Projects Page */
+    body[data-theme="day"] {
+      background-color: #f5f5f7;
+      color: #111;
+    }
+    body[data-theme="day"] .projects-container h1 {
+      color: #111 !important;
+    }
+    
+    /* WIP Animation Styles */
+    @keyframes dig {
+      0% { transform: rotate(0deg) translateY(0); }
+      25% { transform: rotate(-25deg) translateY(-5px); }
+      50% { transform: rotate(10deg) translateY(2px); }
+      75% { transform: rotate(-15deg) translateY(-3px); }
+      100% { transform: rotate(0deg) translateY(0); }
+    }
+    
+    @keyframes fadeUpWip {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .wip-icon {
+      font-size: 5rem;
+      color: #bf81ff; /* Accent color */
+      animation: dig 1.5s infinite ease-in-out;
+      margin-bottom: 20px;
+      display: inline-block;
+      transition: color 0.4s ease;
+    }
+    
+    body[data-theme="day"] .wip-icon {
+      color: #7b2cbf;
+    }
+
+    .wip-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 70vh;
+      text-align: center;
+      padding: 20px;
+      animation: fadeUpWip 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .wip-container h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      transition: color 0.4s ease;
+    }
+
+    .wip-container .subtitle {
+      color: var(--text-secondary, #a1a1aa);
+      font-size: 1.25rem;
+      max-width: 650px;
+      line-height: 1.6;
+      font-style: italic;
+      transition: color 0.4s ease;
+    }
+    
+    body[data-theme="day"] .wip-container .subtitle {
+      color: #555555;
+    }
+  </style>
 </head>
 
 <body>
+  <script>
+    (function() {
+      var theme = localStorage.getItem('site-theme') || 'night';
+      document.body.setAttribute('data-theme', theme);
+    })();
+  </script>
   <!-- =============== HEADER =============== -->
   <header class="site-header">
     <a href="index.html" class="logo">
@@ -57,78 +132,12 @@
 
   <!-- =============== MAIN CONTENT =============== -->
   <main class="projects-container">
-    
-    <div style="margin-bottom: 60px; animation: fadeUp 1s var(--ease-fashion) forwards;">
-      <h1 style="font-size: 4rem; font-weight: 700; color: #fff; margin-bottom: 10px;">Projects</h1>
-      <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 600px;">
-        A curation of my hands-on work in machine learning, spatial computing, and computer vision.
+    <div class="wip-container">
+      <i class="fa-solid fa-person-digging wip-icon"></i>
+      <h1>Under Construction</h1>
+      <p id="witty-text" class="subtitle">
       </p>
     </div>
-
-    <!-- Divider -->
-    <div class="divider-layout" style="margin-top: 0;">
-      <div class="divider-title" style="font-size: 2rem;">2024 / 2023</div>
-      <div class="divider-line"></div>
-    </div>
-
-    <section class="bento-grid" style="animation: fadeUp 1.2s var(--ease-fashion) forwards;">
-      
-      <!-- Project 1 -->
-      <div class="bento-card bento-col-12" style="display: flex; flex-direction: column; gap: 20px;">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px;">
-          <div>
-            <span class="tag">Augmented Reality</span>
-            <h3 class="card-title" style="font-size: 2rem; margin-bottom: 5px;">ARetail: Object Visualization in AR</h3>
-            <p style="color: var(--text-secondary); font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase;">July 2024 – Nov 2024</p>
-          </div>
-          <a href="#" class="btn-secondary" style="padding: 10px 20px; font-size: 0.8rem;">Details <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></a>
-        </div>
-        <p class="card-desc" style="font-size: 1.1rem; max-width: 800px; margin-bottom: 10px;">
-          Democratized 3D model creation using Gaussian Splatting, enabling users with standard smartphones to reconstruct and visualize high-quality 3D models in AR without specialized hardware, reducing costs by 70%.
-        </p>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-          <span style="font-size: 0.8rem; border: 1px solid var(--border-muted); padding: 4px 12px; border-radius: 50px; color: var(--text-secondary);">Gaussian Splatting</span>
-          <span style="font-size: 0.8rem; border: 1px solid var(--border-muted); padding: 4px 12px; border-radius: 50px; color: var(--text-secondary);">COLMAP</span>
-          <span style="font-size: 0.8rem; border: 1px solid var(--border-muted); padding: 4px 12px; border-radius: 50px; color: var(--text-secondary);">Firebase</span>
-          <span style="font-size: 0.8rem; border: 1px solid var(--border-muted); padding: 4px 12px; border-radius: 50px; color: var(--text-secondary);">ARCore</span>
-          <span style="font-size: 0.8rem; border: 1px solid var(--border-muted); padding: 4px 12px; border-radius: 50px; color: var(--text-secondary);">Android Studio</span>
-        </div>
-      </div>
-
-      <!-- Project 2 -->
-      <div class="bento-card bento-col-6" style="display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <span class="tag" style="background: rgba(191, 129, 255, 0.1); color: var(--accent-purple);">Computer Vision</span>
-          <h3 class="card-title">SpotFinder: Real-Time Parking Intelligence</h3>
-          <p style="color: var(--text-secondary); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px;">Jan 2024 – May 2024</p>
-          <p class="card-desc">
-            Achieved 95% accuracy in real-time parking space detection by leveraging OpenCV and CNNs with VGG-based transfer learning, streamlining parking management for drivers and cities.
-          </p>
-        </div>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-          <span style="font-size: 0.75rem; color: #fff; background: var(--surface-high); padding: 4px 10px; border-radius: 4px;">OpenCV</span>
-          <span style="font-size: 0.75rem; color: #fff; background: var(--surface-high); padding: 4px 10px; border-radius: 4px;">CNN / VGG</span>
-          <span style="font-size: 0.75rem; color: #fff; background: var(--surface-high); padding: 4px 10px; border-radius: 4px;">Python</span>
-        </div>
-      </div>
-
-      <!-- Project 3 -->
-      <div class="bento-card bento-col-6" style="display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <span class="tag" style="background: rgba(255, 255, 255, 0.1); color: #fff;">Deep Learning</span>
-          <h3 class="card-title">EyeVision: Eye Disease Prediction</h3>
-          <p style="color: var(--text-secondary); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px;">Aug 2023 – Nov 2023</p>
-          <p class="card-desc">
-            Improved diagnostic accuracy by 20% utilizing deep learning and transfer learning techniques (VGG16) to classify complex eye diseases directly from images.
-          </p>
-        </div>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-          <span style="font-size: 0.75rem; color: #fff; background: var(--surface-high); padding: 4px 10px; border-radius: 4px;">Deep Learning</span>
-          <span style="font-size: 0.75rem; color: #fff; background: var(--surface-high); padding: 4px 10px; border-radius: 4px;">VGG16</span>
-        </div>
-      </div>
-
-    </section>
   </main>
 
 <footer class="site-footer-bottom">
@@ -153,5 +162,26 @@
 </footer>
 
   <script src="main.js?v=2"></script>
+  
+  <script>
+    // Witty Text Randomizer
+    document.addEventListener("DOMContentLoaded", () => {
+      const wittyLines = [
+        "Projects are currently marinating. Good things take time, and a lot of Stack Overflow.",
+        "Currently fine-tuning the physics of a virtual fish tank. Real projects will surface once the fish are fed.",
+        "Rome wasn't built in a day, and neither is this page. Mostly because I spent 4 hours choosing a font.",
+        "404: Masterpieces not found... yet. The hamsters powering my servers are currently on a union break.",
+        "Cooking up some code. Warning: May contain traces of spaghetti and misplaced semicolons.",
+        "I'm currently busy breaking things locally before I push them to production. Stay tuned.",
+        "Battling a rogue CSS flexbox. If I survive, the projects will appear here soon."
+      ];
+
+      const randomLine = wittyLines[Math.floor(Math.random() * wittyLines.length)];
+      const textEl = document.getElementById("witty-text");
+      if (textEl) {
+        textEl.textContent = `"${randomLine}"`;
+      }
+    });
+  </script>
 </body>
 </html>

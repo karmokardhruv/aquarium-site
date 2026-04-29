@@ -5,31 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Resume | Dhruv Karmokar</title>
 
-  <!-- ====== FAVICON (Copied from your index.html) ====== -->
   <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
   <link rel="shortcut icon" href="favicon_io/favicon.ico" type="image/x-icon">
   <link rel="manifest" href="favicon_io/site.webmanifest">
 
-  <!-- 1) FONT-FACE (Copied from your index.html for consistency) -->
   <style>
     @font-face {
       font-family: "Product Sans";
       src: url("fonts/Product Sans Regular.ttf") format("truetype");
-      font-weight: 400; font-style: normal; font-display: swap;
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
     }
+
     @font-face {
       font-family: "Product Sans";
       src: url("fonts/Product Sans Bold.ttf") format("truetype");
-      font-weight: 700; font-style: normal; font-display: swap;
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
     }
   </style>
 
-  <!-- 2) LINK MAIN CSS (Same as your index.html) -->
   <link rel="stylesheet" href="styles.css" />
-
-  <!-- 3) FONT AWESOME (Just in case, for consistency) -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -38,187 +38,379 @@
     referrerpolicy="no-referrer"
   />
 
-  <!-- ================== PAGE-SPECIFIC CSS for RESUME PAGE ================== -->
   <style>
-
-    .resume-container {
-      width: min(100%, 1000px);
+    .resume-shell {
+      width: 100%;
+      max-width: 1600px;
       margin: 0 auto;
-      padding: 140px clamp(20px, 4vw, 32px) clamp(40px, 6vw, 64px);
-      color: #eee;
+      padding: 120px clamp(20px, 5vw, 100px) 60px;
     }
 
-    .resume-header {
-      text-align: center;
-      margin-bottom: 40px;
+    .resume-board {
+      display: grid;
+      grid-template-columns: 320px minmax(0, 1fr);
+      gap: 30px;
+      align-items: start;
+    }
+
+    /* Left Side: Sticky */
+    .resume-left {
+      position: sticky;
+      top: 100px;
+      align-self: start;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 8px;
+      gap: 15px;
+      background-color: var(--surface-high, #111);
+      border: 1px solid var(--border-muted, rgba(255, 255, 255, 0.08));
+      border-radius: 24px;
+      padding: 20px;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
     }
 
-    .resume-name {
-      font-size: clamp(2rem, 5vw, 2.6rem);
-      font-weight: 700;
+    .profile-photo {
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      margin-bottom: 10px;
+      background: #111;
     }
 
-    .resume-number {
-      font-size: 1.05rem;
+    .profile-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .identity-card h1 {
       color: #fff;
-    }
-
-    .resume-contact {
-      font-size: 1rem;
-      color: #ccc;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px 14px;
-    }
-
-    .resume-contact a {
-      color: #ccc;
-      text-decoration: none;
-    }
-
-    .resume-contact a:hover {
-      text-decoration: underline;
-      color: #fff;
-    }
-
-    .resume-section {
-      margin-bottom: 40px;
-    }
-
-    .resume-section h2 {
       font-size: 1.8rem;
-      font-weight: 700;
-      color: #fff;
-      border-bottom: 1px solid #555;
-      padding-bottom: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 4px;
     }
 
-    .resume-entry {
+    .role-line {
+      color: #8eff71; /* Neon green accent */
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .detail-list {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      gap: 12px;
       margin-bottom: 25px;
     }
 
-    .entry-header {
+    .detail-list li {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+
+    .detail-label {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .detail-value, .detail-value a {
+      color: #aaa;
+      text-align: right;
+      text-decoration: none;
+    }
+    .detail-value a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+    
+    .social-strip {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .social-strip a {
+      color: #aaa;
+      font-size: 1.2rem;
+      transition: color 0.2s;
+    }
+    .social-strip a:hover {
+      color: #fff;
+    }
+
+    .resume-download {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: background 0.2s, color 0.2s;
+      margin-top: auto;
+    }
+
+    .resume-download:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    /* Right Side: Scrollable */
+    .resume-main {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background-color: var(--surface-high, #111);
+      border: 1px solid var(--border-muted, rgba(255, 255, 255, 0.08));
+      border-radius: 24px;
+      padding: 30px;
+    }
+
+    .section-heading {
+      color: #fff;
+      font-size: 1.5rem;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-muted, rgba(255, 255, 255, 0.08));
+    }
+    
+    .section-heading span {
+      color: #2a9d8f; /* Teal accent */
+      font-style: italic;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 25px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 20px;
+    }
+
+    .timeline-date {
+      color: #34a0a4; /* Teal accent */
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .education-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 16px;
-      margin-bottom: 8px;
+      gap: 15px;
     }
 
-    .entry-title {
+    .timeline-title {
+      color: #fff;
       font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .score-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
       font-weight: 700;
-      color: #fff;
-      line-height: 1.4;
+      color: #8eff71; /* Neon green accent */
+      background: rgba(142, 255, 113, 0.1);
+      padding: 4px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
     }
 
-    .entry-title a {
-      color: #3cc1ac;
-      text-decoration: none;
-    }
-
-    .entry-title a:hover {
-      color: aquamarine;
-      text-decoration: underline;
-    }
-
-    .entry-subtitle {
-      display: block;
-      font-weight: normal;
+    .timeline-kicker {
       color: #ccc;
-      font-size: 1.05rem;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+
+    .timeline-copy {
+      color: #aaa;
+      font-size: 0.95rem;
       line-height: 1.5;
+      max-width: 750px; /* Limits line length for better readability */
     }
 
-    .entry-meta {
-      font-size: 1rem;
-      color: #bbb;
-      text-align: right;
-      padding-left: 20px;
-      max-width: 260px;
-      line-height: 1.4;
-      flex: 0 0 auto;
+    /* Grids */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
     }
 
-    .entry-details {
-      padding-left: 20px;
-      line-height: 1.6;
+    .content-grid .wide {
+      grid-column: 1 / -1;
+    }
+
+    /* Tech Logos Grid */
+    .tech-logo-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .tech-logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .tech-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .cert-list {
+      display: grid;
+      gap: 15px;
+      list-style: none;
+      padding: 0;
+    }
+
+    .cert-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
       color: #ccc;
+      font-size: 0.95rem;
     }
 
-    .entry-details ul {
-      list-style-type: disc;
-      padding-left: 20px;
-      margin: 10px 0 0 0;
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      list-style: none;
+      padding: 0;
     }
 
-    .entry-details li {
-      margin-bottom: 8px;
+    .pill-list li {
+      background: #222;
+      color: #ccc;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      border: 1px solid rgba(255,255,255,0.05);
     }
 
-    .entry-details strong {
+    .language-list {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .language-list li {
+      display: flex;
+      justify-content: space-between;
+      color: #ccc;
+      font-size: 0.95rem;
+    }
+    .language-list span {
+      color: #888;
+    }
+
+    /* Day Theme Overrides */
+    body[data-theme="day"] .resume-left,
+    body[data-theme="day"] .resume-main {
+      background-color: #fff;
+      border-color: rgba(0,0,0,0.1);
+    }
+    body[data-theme="day"] .identity-card h1,
+    body[data-theme="day"] .section-heading,
+    body[data-theme="day"] .timeline-title,
+    body[data-theme="day"] .detail-label {
+      color: #111;
+    }
+    body[data-theme="day"] .resume-download {
+      color: #111;
+      border-color: #ccc;
+    }
+    body[data-theme="day"] .resume-download:hover {
+      background: #111;
       color: #fff;
     }
-
-    /* Skills section styling */
-    .skills-list {
-        list-style-type: '• ';
-        padding-left: 20px;
-        line-height: 1.8;
-    }
-    .skills-list strong {
-        color: #fff;
+    body[data-theme="day"] .tech-logo,
+    body[data-theme="day"] .pill-list li {
+      background: #f5f5f7;
+      color: #333;
+      border-color: #e5e5e5;
     }
 
-    .skills-list {
-      list-style: disc;
-      padding-left: 20px;
-      line-height: 1.8;
+    body[data-theme="day"] .timeline-date {
+      color: #2a9d8f;
+    }
+    body[data-theme="day"] .role-line,
+    body[data-theme="day"] .score-badge {
+      color: #00875a;
+    }
+    body[data-theme="day"] .score-badge {
+      background: rgba(0, 135, 90, 0.1);
+    }
+    body[data-theme="day"] .timeline-kicker,
+    body[data-theme="day"] .detail-value,
+    body[data-theme="day"] .detail-value a {
+      color: #666;
+    }
+    body[data-theme="day"] .timeline-copy {
+      color: #444;
+    }
+    body[data-theme="day"] .social-strip a {
+      color: #555;
+    }
+    body[data-theme="day"] .social-strip a:hover,
+    body[data-theme="day"] .detail-value a:hover {
+      color: #111;
+    }
+    body[data-theme="day"] .cert-item,
+    body[data-theme="day"] .language-list li {
+      color: #333;
+    }
+    body[data-theme="day"] .language-list span {
+      color: #666;
     }
 
-    .skills-list li {
-      margin-bottom: 8px;
-    }
-
-    @media (max-width: 767px) {
-      .resume-container {
-        padding: 24px 18px 40px;
+    @media (max-width: 900px) {
+      .resume-board {
+        grid-template-columns: 1fr;
       }
-
-      .resume-header {
-        margin-bottom: 32px;
+      .resume-left {
+        position: relative;
+        top: 0;
+        max-height: none;
       }
-
-      .resume-section h2 {
-        font-size: 1.55rem;
+      .content-grid {
+        grid-template-columns: 1fr;
       }
-
-      .entry-header {
-        flex-direction: column;
-        gap: 4px;
-      }
-
-      .entry-meta {
-        padding-left: 0;
-        text-align: left;
-        max-width: none;
-      }
-
-      .entry-details {
-        padding-left: 18px;
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 5px;
       }
     }
-
   </style>
 </head>
 
-<body>  <!-- =============== HEADER =============== -->
+<body>
+  <script>
+    (function() {
+      var theme = localStorage.getItem('site-theme') || 'night';
+      document.body.setAttribute('data-theme', theme);
+    })();
+  </script>
   <header class="site-header">
     <a href="index.html" class="logo">
       <img src="images/dhruv-logo.png" alt="Dhruv Karmokar" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.marginLeft='0';"/>
@@ -240,145 +432,183 @@
       </ul>
     </nav>
   </header>
+
   <button id="theme-btn" class="float-btn top-right" onclick="window.toggleTheme()" title="Toggle Day/Night">
     <i id="theme-icon" class="fa-solid fa-moon"></i>
   </button>
-  <main class="resume-container">
-    <div class="resume-header">
-      <div class="resume-name">Dhruv Karmokar</div>
-      <div class="resume-number">Phone available on request via the contact page</div>
-      <div class="resume-contact">
-        <a href="contact.html">Contact page</a>
-        <a href="https://github.com/karmokardhruv" target="_blank" rel="noopener noreferrer">github.com/karmokardhruv</a>
-        <a href="https://linkedin.com/in/karmokardhruv" target="_blank" rel="noopener noreferrer">linkedin.com/in/karmokardhruv</a>
+
+  <main class="resume-shell">
+    <div class="resume-board" aria-label="Resume">
+      
+      <aside class="resume-left" aria-label="Profile details">
+        <div class="profile-photo">
+          <img src="images/dhruv-headshot.jpg" alt="Dhruv Karmokar" />
+        </div>
+        <div class="identity-card">
+          <h1>Dhruv Karmokar</h1>
+          <p class="role-line">ASE @ TCS</p>
+          <ul class="detail-list">
+            <li><span class="detail-label">Location</span> <span class="detail-value">Thane, India</span></li>
+            <li><span class="detail-label">Phone</span> <span class="detail-value"><a href="contact.html">Contact page</a></span></li>
+            <li><span class="detail-label">Email</span> <span class="detail-value"><a href="mailto:dhruv123karmokar@gmail.com">dhruv123karmokar@gmail.com</a></span></li>
+          </ul>
+          <div class="social-strip">
+            <a href="https://www.linkedin.com/in/karmokardhruv" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://github.com/karmokardhruv" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+            <a href="https://x.com/karmokardhruv" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://instagram.com/karmokardhruv" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+          <a class="resume-download" href="resume.pdf" download>
+            <span>Download Resume</span> <i class="fa-regular fa-file-lines"></i>
+          </a>
+        </div>
+      </aside>
+
+      <div class="resume-main">
+        
+        <!-- Work Experience -->
+        <section>
+          <h2 class="section-heading">Work Experience</h2>
+          <div class="timeline">
+            <article class="timeline-item">
+              <div class="timeline-date">Aug 2025 - Present</div>
+              <div>
+                <h3 class="timeline-title">Tata Consultancy Services</h3>
+                <p class="timeline-kicker">Assistant Systems Engineer (ASE)</p>
+                <p class="timeline-copy">
+                  Managing database operations and executing production support for mission-critical core banking systems. Focusing on rapid incident triage, system monitoring, and coordinating technical fixes under load.
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- Education -->
+        <section>
+          <h2 class="section-heading">Education</h2>
+          <div class="timeline">
+            <article class="timeline-item">
+              <div class="timeline-date">2025</div>
+              <div>
+                <div class="education-header">
+                  <h3 class="timeline-title">Vellore Institute of Technology, Chennai</h3>
+                  <span class="score-badge"><i class="fa-solid fa-star"></i> 8.77 CGPA</span>
+                </div>
+                <p class="timeline-kicker">B.Tech, Computer Science and Engineering with AI and ML</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-date">2021</div>
+              <div>
+                <div class="education-header">
+                  <h3 class="timeline-title">Pace Junior Science College</h3>
+                  <span class="score-badge"><i class="fa-solid fa-award"></i> 89%</span>
+                </div>
+                <p class="timeline-kicker">Higher Secondary Certificate</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-date">2019</div>
+              <div>
+                <div class="education-header">
+                  <h3 class="timeline-title">Vasant Vihar High School & Jr. College</h3>
+                  <span class="score-badge"><i class="fa-solid fa-award"></i> 83.2%</span>
+                </div>
+                <p class="timeline-kicker">Secondary School Certificate</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- Stack -->
+        <section>
+          <h2 class="section-heading">Stack</h2>
+          <div class="tech-logo-grid">
+            <div class="tech-logo"><img src="technology/python.png" alt="Python" /></div>
+            <div class="tech-logo"><img src="technology/sql.png" alt="SQL" /></div>
+            <div class="tech-logo"><img src="technology/linux.png" alt="Linux" /></div>
+            <div class="tech-logo"><img src="technology/git.png" alt="Git" /></div>
+            <div class="tech-logo"><img src="technology/gemini.png" alt="Gemini" /></div>
+            <div class="tech-logo"><img src="technology/claude.png" alt="Claude" /></div>
+            <div class="tech-logo"><img src="technology/js.png" alt="JavaScript" /></div>
+            <div class="tech-logo"><img src="technology/html.png" alt="HTML" /></div>
+            <div class="tech-logo"><img src="technology/css.png" alt="CSS" /></div>
+            <div class="tech-logo"><img src="technology/slack.png" alt="Slack" /></div>
+          </div>
+        </section>
+
+        <!-- Certifications -->
+        <section>
+          <h2 class="section-heading">Certifications</h2>
+          <ul class="cert-list">
+            <li class="cert-item">
+              <div class="tech-logo"><img src="technology/aws.png" alt="AWS" /></div>
+              <span>AWS Certified Solutions Architect - Associate</span>
+            </li>
+            <li class="cert-item">
+              <div class="tech-logo"><img src="technology/google.png" alt="Google" /></div>
+              <span>Artificial Intelligence and Machine Learning powered by Google</span>
+            </li>
+            <li class="cert-item">
+              <div class="tech-logo"><img src="technology/tensorflow.png" alt="TensorFlow" /></div>
+              <span>TensorFlow: Advanced Techniques</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Skills & Languages -->
+        <div class="content-grid">
+          <section>
+            <h2 class="section-heading">Skills</h2>
+            <ul class="pill-list">
+              <li>Creative</li>
+              <li>Critical Thinking</li>
+              <li>Problem Solving</li>
+              <li>Knowledge Sharing</li>
+              <li>Good at organizing</li>
+              <li>Quick Learning</li>
+              <li>Team Collaboration</li>
+              <li>Adaptability</li>
+              <li>Attention to Detail</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="section-heading">Languages</h2>
+            <ul class="language-list">
+              <li>English <span>Professional</span></li>
+              <li>Hindi <span>Fluent</span></li>
+              <li>Bengali <span>Native</span></li>
+              <li>Marathi <span>Conversational</span></li>
+            </ul>
+          </section>
+        </div>
+
       </div>
     </div>
-
-    <!-- EDUCATION SECTION -->
-    <section class="resume-section">
-      <h2>Education</h2>
-      <!-- CORRECTED VIT Entry -->
-      <div class="resume-entry">
-        <!-- Row 1: School name and Location -->
-        <div class="entry-header" style="margin-bottom: 4px;">
-            <div class="entry-title">Vellore Institute of Technology, Chennai</div>
-            <div class="entry-meta">Chennai, TN</div>
-        </div>
-        <!-- Row 2: Degree and CGPA/Date -->
-        <div class="entry-header">
-            <div class="entry-subtitle" style="display: inline;">B. Tech, Computer Science and Engg with spl. in AI and ML</div>
-            <div class="entry-meta">CGPA: 8.77 | Sept 2021 – Present</div>
-        </div>
-      </div>
-
-      <!-- Pace Junior College Entry - CORRECTED -->
-      <div class="resume-entry">
-        <div class="entry-header" style="margin-bottom: 4px;">
-          <div class="entry-title">Pace Junior Science College</div>
-          <div class="entry-meta">Thane (W), MH</div>
-        </div>
-        <div class="entry-header">
-          <div class="entry-subtitle" style="display: inline;">Higher Secondary Certificate (HSC), 12th Standard</div>
-          <div class="entry-meta">89% | 2021</div>
-        </div>
-      </div>
-
-      <!-- Vasant Vihar Entry - CORRECTED -->
-      <div class="resume-entry">
-        <div class="entry-header" style="margin-bottom: 4px;">
-          <div class="entry-title">Vasant Vihar High School & Jr. College</div>
-          <div class="entry-meta">Thane (W), MH</div>
-        </div>
-        <div class="entry-header">
-          <div class="entry-subtitle" style="display: inline;">Secondary School Certificate (SSC), 10th Standard</div>
-          <div class="entry-meta">83.2% | 2019</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJECTS SECTION -->
-    <section class="resume-section">
-      <h2>Projects</h2>
-      <div class="resume-entry">
-        <div class="entry-header">
-          <div class="entry-title">
-            <a href="#">ARetail: Object Visualization in Augmented Reality</a>
-          </div>
-          <div class="entry-meta">University Course (July 2024 – Nov 2024)</div>
-        </div>
-        <div class="entry-details">
-          <ul>
-            <li>Democratized 3D model creation using Gaussian Splatting, enabling users with standard smartphones to reconstruct and visualize high-quality 3D models in AR without specialized hardware, reducing costs by 70%.</li>
-            <li><strong>Technologies Used:</strong> Gaussian Splatting, COLMAP, Firebase, ARCore, Android Studio</li>
-          </ul>
-        </div>
-      </div>
-      <div class="resume-entry">
-        <div class="entry-header">
-          <div class="entry-title">
-            <a href="#">SpotFinder: Real-Time Parking Intelligence for Drivers and Cities</a>
-          </div>
-          <div class="entry-meta">University Course (Jan 2024 – May 2024)</div>
-        </div>
-        <div class="entry-details">
-          <ul>
-            <li>Achieved 95% accuracy in real-time parking space detection by leveraging OpenCV and CNNs with VGG-based transfer learning, streamlining parking management.</li>
-            <li><strong>Technologies Used:</strong> OpenCV, CNN, VGG, Python, Scikit-learn</li>
-          </ul>
-        </div>
-      </div>
-      <div class="resume-entry">
-        <div class="entry-header">
-          <div class="entry-title">
-            <a href="#">EyeVision: Deep Learning Model for Eye Disease Prediction</a>
-          </div>
-          <div class="entry-meta">Aug 2023 – Nov 2023</div>
-        </div>
-        <div class="entry-details">
-          <ul>
-            <li>Improved diagnostic accuracy by 20% utilizing deep learning and transfer learning techniques (VGG16) to classify eye diseases from images.</li>
-            <li><strong>Technologies Used:</strong> Deep Learning, VGG16, Python</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- SKILLS & TOOLS SECTION -->
-    <section class="resume-section">
-      <h2>Skills & Tools</h2>
-      <ul class="skills-list">
-        <li><strong>Technical Skills:</strong> SQL, Python, TensorFlow, Slack, Google Workspace, GitHub, Data Science, LaTeX, Unity</li>
-        <li><strong>Leadership Skills:</strong> Team Leadership, Project Management, Technical Mentoring, Strategic Planning</li>
-        <li><strong>Certifications:</strong> TensorFlow: Advanced Techniques, Artificial Intelligence and Machine Learning Powered by Google</li>
-        <li><strong>Languages:</strong> English (Professional), Hindi (Native), Bengali (Bilingual), Marathi (Bilingual)</li>
-        <li><strong>Extracurricular Activities:</strong> Biosphere Club, Sports, Tutoring</li>
-      </ul>
-    </section>
-
   </main>
 
-<footer class="site-footer-bottom">
-  <!-- A div to group the icons -->
-  <div class="footer-icons">
-    <a href="https://www.linkedin.com/in/karmokardhruv" target="_blank" aria-label="LinkedIn Profile">
-      <i class="fa-brands fa-linkedin"></i>
-    </a>
-    <a href="https://github.com/karmokardhruv" target="_blank" aria-label="GitHub Profile">
-      <i class="fa-brands fa-github"></i>
-    </a>
-    <a href="https://x.com/karmokardhruv" target="_blank" aria-label="X (Twitter) Profile">
-      <i class="fa-brands fa-x-twitter"></i>
-    </a>
-    <a href="https://instagram.com/karmokardhruv" target="_blank" aria-label="Instagram Profile">
-      <i class="fa-brands fa-instagram"></i>
-    </a>
-    <a href="https://www.youtube.com/@karmokardhruv" target="_blank" aria-label="YouTube Channel">
-      <i class="fa-brands fa-youtube"></i>
-    </a>
-  </div>
-  <!-- A separate div for the copyright text -->
-  <div class="footer-copy">Copyright © 2026 Dhruv Karmokar. All rights reserved</div>
-</footer>
+  <footer class="site-footer-bottom">
+    <div class="footer-icons">
+      <a href="https://www.linkedin.com/in/karmokardhruv" target="_blank" aria-label="LinkedIn Profile">
+        <i class="fa-brands fa-linkedin"></i>
+      </a>
+      <a href="https://github.com/karmokardhruv" target="_blank" aria-label="GitHub Profile">
+        <i class="fa-brands fa-github"></i>
+      </a>
+      <a href="https://x.com/karmokardhruv" target="_blank" aria-label="X (Twitter) Profile">
+        <i class="fa-brands fa-x-twitter"></i>
+      </a>
+      <a href="https://instagram.com/karmokardhruv" target="_blank" aria-label="Instagram Profile">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a href="https://www.youtube.com/@karmokardhruv" target="_blank" aria-label="YouTube Channel">
+        <i class="fa-brands fa-youtube"></i>
+      </a>
+    </div>
+    <div class="footer-copy">Copyright &copy; 2026 Dhruv Karmokar. All rights reserved</div>
+  </footer>
+
   <script src="main.js?v=2"></script>
 </body>
 </html>

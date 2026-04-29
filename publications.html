@@ -24,11 +24,15 @@
       src: url("fonts/Product Sans Bold.ttf") format("truetype");
       font-weight: 700; font-style: normal; font-display: swap;
     }
-    /* ADDED ITALIC FONT VARIANT */
     @font-face {
       font-family: "Product Sans";
       src: url("fonts/Product Sans Italic.ttf") format("truetype");
       font-weight: 400; font-style: italic; font-display: swap;
+    }
+    @font-face {
+      font-family: "Space Grotesk";
+      src: url("fonts/SpaceGrotesk-Bold.ttf") format("truetype");
+      font-weight: 700; font-style: normal; font-display: swap;
     }
   </style>
 
@@ -46,214 +50,356 @@
 
   <!-- ================== PAGE-SPECIFIC CSS for PUBLICATIONS PAGE ================== -->
   <style>
-    /* --- SHARED STYLES (from about.html) --- */
-
-    .page-container {
-      display: grid;
-      grid-template-columns: minmax(240px, 280px) minmax(0, 1fr);
-      align-items: start;
-      max-width: 1180px;
+    .publications-redesign {
+      max-width: 1100px;
       margin: 0 auto;
       padding: 140px clamp(20px, 4vw, 32px) clamp(40px, 6vw, 64px);
-      gap: clamp(32px, 6vw, 72px);
+      color: #fff;
     }
 
-    .sidebar {
-      width: 100%;
-      max-width: 280px;
-      text-align: left;
-      margin-left: 0;
+    .pub-hero {
+      margin-bottom: 80px;
     }
 
-    .headshot-wrapper {
-      width: 100%;
-      padding: 5px;
-      border: 1px solid #444;
-      border-radius: 12px;
-      display: inline-block;
+    .pub-title {
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 700;
       margin-bottom: 20px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
     }
 
-    .headshot-wrapper img {
-      width: 100%;
-      display: block;
-      border-radius: 8px;
-    }
-
-    .sidebar-name {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .sidebar-position {
-      font-size: 1rem;
-      color: #ccc;
-      margin-top: 4px;
-    }
-
-    .contact-list {
-      padding-left: 0;
-      margin-top: 24px;
-    }
-
-    .contact-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 12px;
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-
-    .contact-list li i {
-      color: #888;
-      width: 24px;
-      text-align: center;
-      font-size: 1.1rem;
-      flex-shrink: 0;
-    }
-
-    .contact-list li a {
-      color: #ccc;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .contact-list li a:hover {
-      color: #fff;
-      text-decoration: underline;
-    }
-
-    .publications-content {
-      min-width: 0;
-      color: #eee;
-    }
-
-    .publications-content h1 {
-      font-size: clamp(2.2rem, 5vw, 2.7rem);
-      font-weight: 700;
-      margin-top: 0;
-      margin-bottom: 12px;
-      color: #fff;
-    }
-
-    .publications-content .intro-text {
-      margin-bottom: 30px;
-      font-size: 1.08rem;
-      line-height: 1.7;
-      color: #ddd;
-    }
-
-    .publications-content h2 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-top: 40px;
-      margin-bottom: 20px;
-      color: #fff;
-    }
-
-    .publications-content hr {
-      border: 0;
-      height: 1px;
-      background-color: #444;
-      margin: 20px 0;
-    }
-
-    .publication-entry {
-      margin-bottom: 25px;
-      line-height: 1.65;
-    }
-
-    .publication-entry .year {
-      font-weight: 700;
-      display: block;
-      margin-bottom: 10px;
-      font-size: 1.15rem;
-    }
-
-    .publication-entry .title {
-      font-size: 1.08rem;
-      display: inline-block;
-      margin-bottom: 8px;
-      line-height: 1.6;
-      overflow-wrap: anywhere;
-    }
-
-    .publication-entry .authors,
-    .publication-entry .venue {
-      color: #ccc;
-      font-size: 1rem;
-    }
-
-    .publication-entry .venue {
-      display: block;
-      margin-top: 4px;
+    .pub-title span {
+      color: #2a9d8f;
       font-style: italic;
     }
 
-    .publications-content .footnote {
-      margin-top: 40px;
-      color: #aaa;
-      font-size: 0.9rem;
+    .pub-desc {
+      font-size: 1.1rem;
+      color: #adaaaa;
+      line-height: 1.6;
+      max-width: 700px;
     }
 
-    .publications-content a {
-      color: #29a9d6;
+    .pub-desc a {
+      color: #34a0a4;
       text-decoration: none;
-      border-bottom: 1px solid #62dafb44;
+      font-weight: 700;
+      transition: color 0.3s ease;
     }
 
-    .publications-content a:hover {
-      color: #9aefff;
-      border-bottom-color: #9aefff;
+    .pub-desc a:hover {
+      color: #00e5ee;
+      text-decoration: underline;
     }
 
-    @media (max-width: 1023px) {
-      .page-container {
-        grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
-        gap: 32px;
+    /* Sections by year */
+    .pub-year-section {
+      margin-bottom: 60px;
+    }
+
+    .pub-year-header {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .pub-year-text {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      font-weight: 700;
+      color: #3d5567;
+      opacity: 0.8;
+      line-height: 1;
+      margin: 0;
+    }
+
+    .pub-year-line {
+      flex-grow: 1;
+      height: 1px;
+      background-color: rgba(73, 72, 71, 0.3);
+    }
+
+    .pub-year-label {
+      color: #8eff71;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* Cards */
+    .pub-grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: 1fr;
+    }
+
+    .pub-card {
+      background-color: #1a1a1a;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: clamp(24px, 4vw, 32px);
+      display: grid;
+      gap: 24px;
+      grid-template-columns: 1fr;
+      transition: all 0.3s ease;
+    }
+
+    @media (min-width: 800px) {
+      .pub-card {
+        grid-template-columns: 1fr auto;
       }
     }
 
-    @media (max-width: 767px) {
-      .page-container {
-        grid-template-columns: 1fr;
-        gap: 24px;
-        padding: 24px 18px 40px;
-      }
+    .pub-card:hover {
+      border-color: rgba(161, 250, 255, 0.4);
+    }
 
-      .sidebar {
-        margin: 0 auto;
-        display: flex;
+    .pub-card-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .pub-venue-badge {
+      font-size: 0.85rem;
+      color: #777575;
+      font-family: monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+
+    .pub-card-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      line-height: 1.4;
+      color: #fff;
+    }
+
+    .pub-card-venue {
+      font-size: 0.95rem;
+      color: #adaaaa;
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+
+    .pub-card-authors {
+      font-size: 0.95rem;
+      color: #777575;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .pub-card-authors strong {
+      color: #fff;
+    }
+
+    .pub-card-right {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    @media (min-width: 800px) {
+      .pub-card-right {
         flex-direction: column;
-        align-items: center;
-        max-width: 320px;
-      }
-
-      .contact-list li {
-        justify-content: center;
-        text-align: left;
-      }
-
-      .publications-content h1,
-      .publications-content h2 {
-        text-align: center;
-      }
-
-      .publications-content h2 {
-        font-size: 1.5rem;
-      }
-
-      .publications-content .intro-text {
-        font-size: 1rem;
+        align-items: flex-end;
+        justify-content: flex-start;
       }
     }
 
+    .pub-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #ccc;
+      background-color: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      min-width: 100px;
+    }
+
+    .pub-btn:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: #fff;
+    }
+
+    .pub-btn.primary {
+      background-color: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+
+    .pub-btn.primary:hover {
+      background-color: #e0e0e0;
+      border-color: #e0e0e0;
+      color: #000;
+    }
+
+    /* Abstract */
+    .pub-abstract-toggle {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      color: #ccc;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      margin-top: 4px;
+      transition: all 0.2s;
+    }
+
+    .pub-abstract-toggle:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: #fff;
+    }
+
+    .pub-abstract-content {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      margin-top: 0;
+      padding: 0 16px;
+      background-color: #0e0e0e;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      font-size: 0.9rem;
+      color: #adaaaa;
+      line-height: 1.6;
+      width: 100%;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .pub-abstract-content.show {
+      max-height: 1500px;
+      opacity: 1;
+      margin-top: 16px;
+      padding: 16px;
+      border-color: rgba(73, 72, 71, 0.2);
+    }
+
+    .pub-footnote {
+      text-align: center;
+      color: #777575;
+      font-size: 0.85rem;
+      margin-top: 60px;
+    }
+
+    /* Day Mode Support */
+    body[data-theme="day"] .publications-redesign {
+      color: #111;
+    }
+    body[data-theme="day"] .pub-title,
+    body[data-theme="day"] .pub-title span {
+      color: #111;
+    }
+    body[data-theme="day"] .pub-title span {
+      color: #2a9d8f;
+    }
+    body[data-theme="day"] .pub-desc {
+      color: #555;
+    }
+    body[data-theme="day"] .pub-year-text {
+      color: #2c3e50;
+    }
+    body[data-theme="day"] .pub-year-line {
+      background-color: rgba(0, 0, 0, 0.15);
+    }
+    body[data-theme="day"] .pub-year-label {
+      color: #00875a;
+    }
+    body[data-theme="day"] .pub-card {
+      background-color: #fff;
+      border-color: #e0e0e0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+    body[data-theme="day"] .pub-card:hover {
+      background-color: #fafafa;
+      border-color: rgba(42, 157, 143, 0.4);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    }
+    body[data-theme="day"] .pub-venue-badge {
+      color: #666;
+    }
+    body[data-theme="day"] .pub-card-title {
+      color: #111;
+    }
+    body[data-theme="day"] .pub-card-venue {
+      color: #555;
+    }
+    body[data-theme="day"] .pub-card-authors {
+      color: #444;
+    }
+    body[data-theme="day"] .pub-card-authors strong {
+      color: #000;
+    }
+    body[data-theme="day"] .pub-btn {
+      background-color: transparent;
+      border-color: #888;
+      color: #333;
+    }
+    body[data-theme="day"] .pub-btn:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+      border-color: #333;
+      color: #111;
+    }
+    body[data-theme="day"] .pub-btn.primary {
+      background-color: #1a2634;
+      color: #fff;
+      border-color: #1a2634;
+    }
+    body[data-theme="day"] .pub-btn.primary:hover {
+      background-color: #2a9d8f;
+      border-color: #2a9d8f;
+      color: #fff;
+    }
+    body[data-theme="day"] .pub-abstract-toggle {
+      border-color: #888;
+      color: #333;
+    }
+    body[data-theme="day"] .pub-abstract-toggle:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+      border-color: #333;
+      color: #111;
+    }
+    body[data-theme="day"] .pub-abstract-content {
+      background-color: #f5f5f5;
+      border-color: transparent;
+      color: #444;
+    }
+    body[data-theme="day"] .pub-abstract-content.show {
+      border-color: #ddd;
+    }
   </style>
 </head>
 
 <body>
+  <script>
+    (function() {
+      var theme = localStorage.getItem('site-theme') || 'night';
+      document.body.setAttribute('data-theme', theme);
+    })();
+  </script>
   <!-- =============== HEADER =============== -->
   <header class="site-header">
     <a href="index.html" class="logo">
@@ -285,51 +431,153 @@
   </button>
 
 
-  <main class="page-container">
-    <!-- ===== LEFT SIDEBAR (Copied directly from about.html) ===== -->
-    <aside class="sidebar">
-      <div class="headshot-wrapper">
-        <img src="images/dhruv-headshot.jpg" alt="Dhruv Karmokar" />
+  <main class="publications-redesign">
+    <!-- Hero Section -->
+    <header class="pub-hero">
+      <h1 class="pub-title">Research <span>&amp;</span> Archive</h1>
+      <p class="pub-desc">
+        Peer-reviewed research across cryptography, multimodal ML, and intelligent systems—spanning books, journals, and international conferences to build more secure digital infrastructure. View full profile on <a href="https://scholar.google.com/citations?user=qImi6RMAAAAJ&hl" target="_blank">Google Scholar</a>.
+      </p>
+    </header>
+
+    <!-- 2026 Section -->
+    <section class="pub-year-section">
+      <div class="pub-year-header">
+        <h2 class="pub-year-text">2026</h2>
+        <div class="pub-year-line"></div>
+        <span class="pub-year-label">Book</span>
       </div>
-      <div class="sidebar-name">Dhruv Karmokar</div>
-      <div class="sidebar-position">B.Tech, Computer Science | VIT Chennai</div>
-      <ul class="contact-list">
-        <li><i class="fa-solid fa-location-dot"></i> Thane, India</li>
-        <li><i class="fa-brands fa-instagram"></i> <a href="https://instagram.com/karmokardhruv" target="_blank">Instagram</a></li>
-        <li><i class="fa-brands fa-x-twitter"></i> <a href="https://x.com/karmokardhruv" target="_blank">X (Twitter)</a></li>
-        <li><i class="fa-brands fa-youtube"></i> <a href="https://youtube.com/@karmokardhruv" target="_blank">YouTube</a></li>
-        <li><i class="fa-solid fa-graduation-cap"></i> <a href="https://scholar.google.com/citations?user=qImi6RMAAAAJ&hl" target="_blank">Google Scholar</a></li>
-        <li><i class="fa-brands fa-orcid"></i> <a href="https://orcid.org/0009-0003-7108-7852" target="_blank">ORCID</a></li>
-      </ul>
-    </aside>
 
-    <!-- ===== RIGHT SIDE: Publications List ===== -->
-    <section class="publications-content">
-        <h1>Publications</h1>
-        <p class="intro-text">
-            You can also find my articles on my <a href="https://scholar.google.com/citations?user=qImi6RMAAAAJ&hl" target="_blank">Google Scholar profile</a>.
-        </p>
+      <div class="pub-grid">
+        <!-- Publication Card -->
+        <div class="pub-card">
+          <div class="pub-card-left">
+            <span class="pub-venue-badge">CRC Press - Taylor & Francis &middot; 2026</span>
+            <h3 class="pub-card-title">A secure cryptographic framework: Leveraging Fermat's two squares theorem and trigonometric transformations for enhanced encryption</h3>
+            <p class="pub-card-venue">Information and Communication Systems, 911-917</p>
+            <p class="pub-card-authors">R Kumar, M Marimuthu, A Tamotia, <strong>DS Karmokar</strong>, P Revathi.</p>
+            
+            <!-- Add your abstract text here -->
+            <button class="pub-abstract-toggle" onclick="this.nextElementSibling.classList.toggle('show'); this.textContent = this.nextElementSibling.classList.contains('show') ? 'Abstract ↑' : 'Abstract ↓';">
+              Abstract ↓
+            </button>
+            <div class="pub-abstract-content">
+              <!-- ABSTRACT CONTENT GOES HERE -->
+              The rapid growth of cybersecurity challenges demands faster and stronger cryptographic algorithms for text and image encryption. This study introduces a new encryption algorithm based on the concept of the Fermat theorem and the use of trigonometric functions and transformations and the current cryptographic tools. The proposed approach will improve the security of data, as it is a more robust approach to saving sensitive information that combines the characteristics of transcendental number and trigonometric transformations. A prime number that is congruent to one, modulo four defines two secret keys which Fermat has established in his Theorem. The keys are then applied during the trigonometric transformation phases of encryption process. The protocol uses the decimal representation of a transcendental number to encode the plaintext characters to unique numerical values adding resistance to frequency and brute force attacks. Tangent and arctangent functions are trigonometric transformations that are used in both encrypting and decrypting the messages, which transform the integers into floating point numbers, and bring great non-linearity in the communication medium. The characteristics of trigonometric function and transcendental number lay a mathematically sound system guaranteeing a high entropy and accurate reversibility. Experimental verification spells out that the decryption protocols recover the original secret message with perfect fidelity, which makes the accuracy and reliability of the proposed method.
+            </div>
+          </div>
 
-        <h2>Journal Publications</h2>
-        <hr/>
-        <div class="publication-entry">
-            <span class="year">2025</span>
-            <a class="title" href="https://ieeexplore.ieee.org/abstract/document/11003144" target="_blank">Fusion of Multimodal Audio Data for Enhanced Speaker Identification Using Kolmogorov-Arnold Networks</a>
-            <p class="authors">Aryaman Tamotia*, <strong>Dhruv Shantu Karmokar*</strong>, Rethi Komal*, K Khadar Nawas†, A Shahina, A Nayeemulla Khan</p>
-            <em class="venue">IEEE Access (2025) (accepted)</em>
+          <div class="pub-card-right">
+            <a href="papers/10.1201-9781003650201-144.pdf" class="pub-btn primary" target="_blank">PDF</a>
+            <a href="https://doi.org/10.1201/9781003650201-144" class="pub-btn" target="_blank">SOURCE</a>
+            <a href="https://bit.ly/41XswYG" class="pub-btn" target="_blank">SCHOLAR</a>
+            <button class="pub-btn" onclick="navigator.clipboard.writeText(this.dataset.citation); const original = this.innerText; this.innerText = 'COPIED!'; setTimeout(() => this.innerText = original, 2000);" data-citation="@incollection{kumar2026secure,
+  title={A secure cryptographic framework: Leveraging Fermat's two squares theorem and trigonometric transformations for enhanced encryption},
+  author={Kumar, Ranjith and Marimuthu, M and Tamotia, Aryaman and Karmokar, Dhruv Shantu and Revathi, P},
+  booktitle={Information and Communication Systems},
+  pages={911--917},
+  year={2026},
+  publisher={CRC Press}
+}">CITE</button>
+          </div>
         </div>
-
-        <h2>Conference Paper</h2>
-        <hr/>
-        <div class="publication-entry">
-            <span class="year">2023</span>
-            <a class="title" href="https://ieeexplore.ieee.org/abstract/document/10434693" target="_blank">Facilitating Fingerprint-Based Door Automation System Using RFID and Bluetooth</a>
-            <p class="authors">A. Sherly Alphonse†, Chitranshu Gupta, Mohammad Kamran Warsi, <strong>Dhruv Shantu Karmokar*</strong>, Aryaman Tamotia*</p>
-            <p class="venue">Innovations in Power and Advanced Computing Technologies (i-PACT) (pp. 1-5). IEEE (2023)</p>
-        </div>
-
-        <p class="footnote">* equal contribution, † corresponding author</p>
+      </div>
     </section>
+
+    <!-- 2025 Section -->
+    <section class="pub-year-section">
+      <div class="pub-year-header">
+        <h2 class="pub-year-text">2025</h2>
+        <div class="pub-year-line"></div>
+        <span class="pub-year-label">Journal</span>
+      </div>
+
+      <div class="pub-grid">
+        <!-- Publication Card -->
+        <div class="pub-card">
+          <div class="pub-card-left">
+            <span class="pub-venue-badge">IEEE ACCESS &middot; 2025</span>
+            <h3 class="pub-card-title">Fusion of Multimodal Audio Data for Enhanced Speaker Identification Using Kolmogorov-Arnold Networks</h3>
+            <p class="pub-card-venue">IEEE Access ( Volume: 13)</p>
+            <p class="pub-card-authors">A Tamotia*, <strong>DS Karmokar*</strong>, R Komal*, KK Nawas†, A Shahina, AN Khan.</p>
+            
+            <!-- Add your abstract text here -->
+            <button class="pub-abstract-toggle" onclick="this.nextElementSibling.classList.toggle('show'); this.textContent = this.nextElementSibling.classList.contains('show') ? 'Abstract ↑' : 'Abstract ↓';">
+              Abstract ↓
+            </button>
+            <div class="pub-abstract-content">
+              <!-- ABSTRACT CONTENT GOES HERE -->
+              Speaker identification using audio data is quite challenging because of inherent differences between people, ambient noise, and variable recording conditions. Although the classical deep learning methods are effective, they have rather high computational cost, which leads to usually cumbersome parameter tuning processes and hence reduce their applicability to real-world deployments. In this paper, we discuss an efficient version of Kolmogorov-Arnold Network for audio-based speaker identification using three different types of audio inputs: bone conduction, air conduction, and throat microphone recordings, alongside evaluation on the publicly available LibriSpeech dataset to enhance reproducibility. To optimize the performance of these modalities, we investigate data-level, feature-level, and decision-level fusion techniques. An exhaustive comparison is performed against some of the prominent deep learning architectures, namely VGG-19, ResNet-152, EfficientNetV2, and DenseNet-121, both as standalone architectures and within multimodal combinations for the purpose of evaluating the proposed framework. We demonstrate that our model achieves a significant increase in accuracy up to 99.375% through the use of MFCC and GFCC feature inputs with data-level fusion through MFCC features and achieves this level of accuracy using substantially fewer parameters than those of conventional deep learning models. This makes the KAN framework a highly efficient choice for audio-based speaker identification. One of the critical innovations within this design is a class of trainable activation functions that eliminate the need for traditional weight parameters, thereby providing scalable and computationally efficient solutions. This work contributes to the field of biometrics by providing a refined, resource-efficient approach to speaker identification based on multimodal audio data.
+            </div>
+          </div>
+
+          <div class="pub-card-right">
+            <a href="papers/10.1109-ACCESS.2025.3569606.pdf" class="pub-btn primary" target="_blank">PDF</a>
+            <a href="https://doi.org/10.1109/ACCESS.2025.3569606" class="pub-btn" target="_blank">SOURCE</a>
+            <a href="https://bit.ly/4vJxupo" class="pub-btn" target="_blank">SCHOLAR</a>
+            <button class="pub-btn" onclick="navigator.clipboard.writeText(this.dataset.citation); const original = this.innerText; this.innerText = 'COPIED!'; setTimeout(() => this.innerText = original, 2000);" data-citation="@ARTICLE{11003144,
+  author={Tamotia, Aryaman and Karmokar, Dhruv Shantu and Komal, Rethi and Nawas, K. Khadar and Shahina, A. and Khan, A. Nayeemulla},
+  journal={IEEE Access}, 
+  title={Fusion of Multimodal Audio Data for Enhanced Speaker Identification Using Kolmogorov-Arnold Networks}, 
+  year={2025},
+  volume={13},
+  number={},
+  pages={87640-87653},
+  keywords={Microphones;Speaker recognition;Feature extraction;Accuracy;Noise;Computational modeling;Mel frequency cepstral coefficient;Deep learning;Bones;Robustness;Kolmogorov-Arnold networks;speaker identification;multimodal fusion;audio classification;MFCC;GFCC;trainable activation functions},
+  doi={10.1109/ACCESS.2025.3569606}}
+">CITE</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2023 Section -->
+    <section class="pub-year-section">
+      <div class="pub-year-header">
+        <h2 class="pub-year-text">2023</h2>
+        <div class="pub-year-line"></div>
+        <span class="pub-year-label">Conference</span>
+      </div>
+
+      <div class="pub-grid">
+        <!-- Publication Card -->
+        <div class="pub-card">
+          <div class="pub-card-left">
+            <span class="pub-venue-badge">i-PACT / IEEE &middot; 2023</span>
+            <h3 class="pub-card-title">Facilitating Fingerprint-Based Door Automation System Using RFID and Bluetooth</h3>
+            <p class="pub-card-venue">2023 Innovations in Power and Advanced Computing Technologies (i-PACT)</p>
+            <p class="pub-card-authors">AS Alphonse†, C Gupta, MK Warsi, <strong>KD Shantu*</strong>, A Tamotia*.</p>
+            
+            <!-- Add your abstract text here -->
+            <button class="pub-abstract-toggle" onclick="this.nextElementSibling.classList.toggle('show'); this.textContent = this.nextElementSibling.classList.contains('show') ? 'Abstract ↑' : 'Abstract ↓';">
+              Abstract ↓
+            </button>
+            <div class="pub-abstract-content">
+              <!-- ABSTRACT CONTENT GOES HERE -->
+              This paper focuses on the adoption of biometric and RFID security gadgets as innovative solutions for enhancing door lock systems. The traditional reliance on physical keys has proven vulnerable to security breaches, prompting the need for more robust measures. Biometric features such as Fingerprint, Voice and Bluetooth offer unparalleled security by leveraging unique biological characteristics for authentication. Additionally, integrating RFID technology enables convenient access control through assigned cards or tags, eliminating the need for physical keys or complex passwords. The combination of these cutting-edge solutions establishes a comprehensive security infrastructure, significantly reducing risks associated with conventional lock systems. This research highlights the benefits and applications of these technologies in various settings, emphasizing their role in creating a safer environment for individuals and organizations.
+            </div>
+          </div>
+
+          <div class="pub-card-right">
+            <a href="https://doi.org/10.1109/i-PACT58649.2023.10434693" class="pub-btn" target="_blank">SOURCE</a>
+            <a href="https://bit.ly/4ucbPEO" class="pub-btn" target="_blank">SCHOLAR</a>
+            <button class="pub-btn" onclick="navigator.clipboard.writeText(this.dataset.citation); const original = this.innerText; this.innerText = 'COPIED!'; setTimeout(() => this.innerText = original, 2000);" data-citation="@INPROCEEDINGS{10434693,
+  author={Alphonse, A. Sherly and Gupta, Chitranshu and Kamran Warsi, Mohammad and Shantu, Karmokar Dhruv and Tamotia, Aryaman},
+  booktitle={2023 Innovations in Power and Advanced Computing Technologies (i-PACT)}, 
+  title={Facilitating Fingerprint-Based Door Automation System Using RFID and Bluetooth}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={1-5},
+  keywords={Technological innovation;Bluetooth;Authentication;Fingerprint recognition;Standards;Smart phones;Radiofrequency identification;Bluetooth;door;IoT;RFID;Arduino},
+  doi={10.1109/i-PACT58649.2023.10434693}}
+">CITE</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <p class="pub-footnote">* equal contribution | † corresponding author</p>
   </main>
 
 <footer class="site-footer-bottom">

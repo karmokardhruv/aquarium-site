@@ -43,34 +43,53 @@
 
     .about-container {
       display: grid;
-      grid-template-columns: minmax(240px, 280px) minmax(0, 1fr);
+      grid-template-columns: minmax(280px, 320px) minmax(0, 1fr);
       align-items: start;
-      max-width: 1180px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 140px clamp(20px, 4vw, 32px) clamp(40px, 6vw, 64px);
-      gap: clamp(32px, 6vw, 72px);
+      gap: clamp(40px, 8vw, 100px);
     }
 
     .about-sidebar {
       width: 100%;
-      max-width: 280px;
       text-align: left;
       margin-left: 0;
     }
 
     .headshot-wrapper {
+      position: relative;
       width: 100%;
-      padding: 5px;
-      border: 1px solid #444;
-      border-radius: 12px;
+      border-radius: 24px;
+      overflow: hidden;
       display: inline-block;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      aspect-ratio: 1 / 1;
     }
 
     .headshot-wrapper img {
       width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
       display: block;
-      border-radius: 8px;
+      transition: opacity 0.4s ease;
+    }
+
+    .day-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+    }
+
+    body[data-theme="day"] .night-img {
+      opacity: 0;
+    }
+
+    body[data-theme="day"] .day-img {
+      opacity: 1;
     }
 
     .about-name {
@@ -80,8 +99,9 @@
     }
 
     .about-position {
-      font-size: 1rem;
-      color: #ccc;
+      font-size: 0.95rem;
+      color: #8eff71; /* Neon green accent to match resume */
+      font-weight: 700;
       margin-top: 4px;
     }
 
@@ -108,7 +128,7 @@
     }
 
     .contact-list li a {
-      color: #ccc;
+      color: #aaa;
       text-decoration: none;
       transition: color 0.2s;
     }
@@ -124,18 +144,18 @@
     }
 
     .about-content h1 {
-      font-size: clamp(2.2rem, 5vw, 2.7rem);
+      font-size: clamp(3rem, 6vw, 4rem);
       font-weight: 700;
       margin-top: 0;
-      margin-bottom: 24px;
+      margin-bottom: 30px;
       color: #fff;
     }
 
     .about-content p {
-      line-height: 1.75;
-      margin-bottom: 20px;
-      font-size: 1.08rem;
-      color: #ddd;
+      line-height: 1.8;
+      margin-bottom: 24px;
+      font-size: 1.15rem;
+      color: #aaa; /* Matches timeline-copy in resume */
     }
 
     .about-content a {
@@ -146,6 +166,14 @@
 
     .about-content a:hover {
       color: #9aefff;
+    }
+
+    body[data-theme="day"] .about-content a {
+      color: #0066cc;
+    }
+
+    body[data-theme="day"] .about-content a:hover {
+      color: #004999;
     }
 
     @media (max-width: 1023px) {
@@ -188,6 +216,12 @@
 </head>
 
 <body>
+  <script>
+    (function() {
+      var theme = localStorage.getItem('site-theme') || 'night';
+      document.body.setAttribute('data-theme', theme);
+    })();
+  </script>
   <!-- =============== HEADER =============== -->
   <header class="site-header">
     <a href="index.html" class="logo">
@@ -224,12 +258,13 @@
     <aside class="about-sidebar">
       <!-- 1) HEADSHOT with wrapper for border effect -->
       <div class="headshot-wrapper">
-        <img src="images/dhruv-headshot.jpg" alt="Dhruv Karmokar" />
+        <img src="images/dhruv-night.jpg" alt="Dhruv Karmokar" class="night-img" />
+        <img src="images/dhruv-day.png" alt="Dhruv Karmokar" class="day-img" />
       </div>
 
       <!-- 2) NAME + POSITION -->
       <div class="about-name">Dhruv Karmokar</div>
-      <div class="about-position">B.Tech, Computer Science | VIT Chennai</div>
+      <div class="about-position">ASE @ TCS</div>
 
       <!-- 3) CONTACT / SOCIAL LIST -->
       <ul class="contact-list">
@@ -244,18 +279,18 @@
 
     <!-- ===== RIGHT SIDE: “About Me” TEXT ===== -->
     <section class="about-content">
-      <h1>About me</h1>
+      <h1>Hi there!</h1>
       <p>
-        Hello! 
+        I’m Dhruv Karmokar — a Computer Science graduate from VIT Chennai. I work at the intersection of full-stack development and artificial intelligence, driven by a curiosity to build, explore, and turn complex ideas into working products.
       </p>
       <p>
-        I’m Dhruv Karmokar, a final-year Computer Science student at VIT Chennai with a keen interest in the intersection of full-stack development, artificial intelligence, and creative technology. My academic journey has equipped me with a strong foundation in software engineering and machine learning principles.
+        My work spans a wide range of domains, from crafting interactive, scalable web applications to experimenting with machine learning models and intelligent systems. I enjoy tackling challenges across the entire stack—whether that involves designing clean, user-focused interfaces or implementing efficient backend architectures. For me, the goal is always to combine solid engineering with thoughtful design to create solutions that are both technically sound and practically useful.
       </p>
       <p>
-        My work spans a wide array of topics, from developing scalable web applications to exploring complex algorithms in AI. I enjoy collaborating on projects that demand both technical rigor and a creative approach to problem-solving. You can explore some of my <a href="index.html#projects">projects</a> to see my work in action.
+        I’m constantly exploring new technologies to push my work further, and I'm always looking for opportunities to collaborate on projects that demand both technical depth and creative problem-solving.
       </p>
       <p>
-        I'm always open to discussing new technologies, creative ideas, or potential collaborations. For a more detailed look at my professional experience, please see my <a href="resume.html">resume</a>, connect with me on <a href="https://www.linkedin.com/in/karmokardhruv/" target="_blank" rel="noopener noreferrer">LinkedIn</a>, or send me an <a href="mailto:dhruv123karmokar@gmail.com">email</a>.
+        Feel free to explore my <a href="index.html#projects">projects</a> to see what I've been building, check out my <a href="resume.html">resume</a>, or connect with me via <a href="https://www.linkedin.com/in/karmokardhruv/" target="_blank" rel="noopener noreferrer">LinkedIn</a> or <a href="mailto:dhruv123karmokar@gmail.com">email</a>.
       </p>
       <p>
         Thanks for visiting!

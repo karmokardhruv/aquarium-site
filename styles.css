@@ -2,7 +2,7 @@
    0) CSS VARIABLES
    ================================ */
 :root {
-  --accent-cyan: #00f4fe;
+  --accent-cyan: #eee605;
   --accent-purple: #bf81ff;
   --border-muted: rgba(255, 255, 255, 0.08);
   --border-hover: rgba(255, 255, 255, 0.2);
@@ -25,13 +25,15 @@
   box-sizing: border-box;
 }
 
-html,
+html {
+  /* Let body background propagate to viewport */
+}
+
 body {
   background-color: #000;       /* pure black background */
   color: #fff;                   /* white text */
   font-family: "Product Sans", sans-serif;
   scroll-behavior: smooth;
-  overflow-x: hidden;
 }
 
 ul {
@@ -187,8 +189,8 @@ a {
 }
 
 /* per‐menu custom colors */
-.nav-home        a { --underline-color: #00f4fe; }
-.nav-projects    a { --underline-color: #EFB920; }
+.nav-home        a { --underline-color: #27628d; }
+.nav-projects    a { --underline-color: #d4b804; }
 .nav-publications a { --underline-color: #e91e63; }
 .nav-about       a { --underline-color: #7CB82F; }
 .nav-resume      a { --underline-color: #8C68CB; }
@@ -618,18 +620,23 @@ body[data-theme="day"] .float-btn.top-right:hover {
    AQUARIUM: Footer with Gradient
    ================================ */
 .aquarium-footer-gradient {
-  margin-top: calc(100vh - 60px);
-  height: 150px;
+  top: calc(100vh + 10px);
+  position: relative;
+  left: 0;
+  width: 100%;
+  height: 120px;
   background: linear-gradient(to bottom, transparent, #000);
   pointer-events: none;
-  position: relative;
   z-index: 10;
 }
 
 .aquarium-footer {
-  background: #000;
-  padding: 20px 20px 80px;
+  top: calc(100vh + 10px);
   position: relative;
+  left: 0;
+  width: 100%;
+  background: #000;
+  padding: 10px 20px 20px;
   z-index: 10;
 }
 
@@ -704,12 +711,12 @@ body[data-theme="day"] .nav-toggle-bar {
    FIX: Scrollbar gap — ensure no horizontal overflow
    ================================ */
 html {
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100vw;
 }
 
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
 }
 
@@ -765,7 +772,7 @@ body[data-theme="day"] .about-content h1 {
 }
 
 body[data-theme="day"] .about-position {
-  color: #666;
+  color: #00875a;
 }
 
 body[data-theme="day"] .about-content p {
@@ -1088,6 +1095,8 @@ body[data-theme="day"] .video-container::after {
 }
 
 body[data-theme="day"] {
+  --bg: #f5f5f7;
+  --text: #111;
   --surface-low: #fff;
   --surface-high: #f0f0f0;
   --text-secondary: #555;

@@ -67,7 +67,7 @@
     .contact-inner {
       background:
         linear-gradient(rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.65)),
-        url("images/contact-background.jpg");
+        url("images/contact-background-night.jpg");
       background-size: cover;
       background-position: center center;
       width: min(100%, 1450px);
@@ -131,22 +131,80 @@
     }
 
     .submit-btn {
-      min-height: 48px;
-      padding: 12px 30px;
-      background-color: #333;
-      color: #fff;
-      border: 1px solid #555;
+      min-height: 52px;
+      padding: 12px 36px;
+      background-color: #ff5b00;
+      color: #ffffff;
+      border: none;
       border-radius: 999px;
       font-family: "Product Sans", sans-serif;
-      font-size: 1rem;
-      font-weight: bold;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
       cursor: pointer;
-      transition: background-color 0.2s, color 0.2s;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      box-shadow: 0 4px 14px rgba(255, 91, 0, 0.35);
     }
 
     .submit-btn:hover {
-      background-color: #fff;
+      background-color: #ff6a1a;
+      box-shadow: 0 6px 20px rgba(255, 91, 0, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .submit-btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 8px rgba(255, 91, 0, 0.3);
+    }
+
+    /* --- LIGHT MODE SPECIFIC STYLES --- */
+    body[data-theme="day"] {
+      background-color: #f4f5f7;
+    }
+
+    body[data-theme="day"] .contact-container {
+      background-color: #f4f5f7;
+    }
+
+    body[data-theme="day"] .contact-inner {
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.3)),
+        url("images/contact-background-day.jpg");
+      background-size: cover;
+      background-position: center center;
+    }
+
+    body[data-theme="day"] .contact-inner h1 {
+      color: #ffffff;
+    }
+
+    body[data-theme="day"] .contact-inner .intro-text {
+      color: #e0d9d9;
+    }
+
+    body[data-theme="day"] .form-group label {
+      color: #100f0f;
+    }
+    
+    body[data-theme="day"] .form-group input,
+    body[data-theme="day"] .form-group textarea {
+      border: 1px solid #ccc;
+      background-color: rgba(255, 255, 255, 0.85);
       color: #000;
+    }
+
+    body[data-theme="day"] .submit-btn {
+      background-color: #277da1;
+      box-shadow: 0 4px 14px rgba(39, 125, 161, 0.35);
+    }
+
+    body[data-theme="day"] .submit-btn:hover {
+      background-color: #2e8baf;
+      box-shadow: 0 6px 20px rgba(39, 125, 161, 0.5);
+    }
+
+    body[data-theme="day"] .submit-btn:active {
+      box-shadow: 0 2px 8px rgba(39, 125, 161, 0.3);
     }
 
     @media (max-width: 767px) {
@@ -179,6 +237,12 @@
 </head>
 
 <body>
+  <script>
+    (function() {
+      var theme = localStorage.getItem('site-theme') || 'night';
+      document.body.setAttribute('data-theme', theme);
+    })();
+  </script>
   <!-- This wrapper still creates the sidebars -->
   <div class="page-wrapper">
 

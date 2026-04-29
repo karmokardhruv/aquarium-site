@@ -99,10 +99,22 @@ class Fish {
 
     this.baseScale = (0.2 + Math.random() * 0.14) * 1.4; //bigger fish
 
-    // Pixi Sprite
+    // Pixi SimpleRope for wiggling animation
     const tex = APP_STATE.theme === 'day' ? dayTextures[this.dayTextureIndex] : nightTextures[this.nightTextureIndex];
-    this.sprite = new PIXI.Sprite(tex);
-    this.sprite.anchor.set(0.5);
+    
+    this.sprite = new PIXI.Container();
+    
+    this.points = [];
+    const numPoints = 15;
+    const ropeLength = 150; // Approximated width of fish texture
+    for (let i = 0; i < numPoints; i++) {
+      this.points.push(new PIXI.Point(i * ropeLength / (numPoints - 1), 0));
+    }
+    
+    this.rope = new PIXI.SimpleRope(tex, this.points);
+    this.rope.x = -ropeLength / 2; // Center the rope in the container
+    this.sprite.addChild(this.rope);
+    
     this.sprite.scale.set(this.baseScale);
     fishLayer.addChild(this.sprite);
 
@@ -119,10 +131,11 @@ class Fish {
     );
     Matter.World.add(world, this.body);
 
-    // --- Unique speed per fish ---
-    this.speed = 0.5 + Math.random() * 2.0; // range: 0.5 to 2.5
+    // --- Unique speed per fish (reduced by 20%) ---
+    this.speed = (0.5 + Math.random() * 2.0) * 0.8; 
     this.vx = (Math.random() > 0.5 ? 1 : -1) * this.speed;
     this.vy = (Math.random() - 0.5) * 0.6;
+    // Natively faces RIGHT. If vx > 0 (moving right), we keep positive scale.
     this.currentScaleX = this.vx > 0 ? this.baseScale : -this.baseScale;
     this.sprite.scale.x = this.currentScaleX;
 
@@ -137,13 +150,53 @@ class Fish {
     fishes.push(this);
   }
 
+  getMouthPosition() {
+    const bodyWidth = 120 * this.baseScale;
+    // Since natively faces RIGHT, positive scale means facing right.
+    const isFacingRight = this.currentScaleX > 0;
+    return {
+      x: this.body.position.x + (isFacingRight ? bodyWidth / 2 : -bodyWidth / 2),
+      y: this.body.position.y
+    };
+  }
+
   updateTexture() {
     const tex = APP_STATE.theme === 'day' ? dayTextures[this.dayTextureIndex] : nightTextures[this.nightTextureIndex];
-    this.sprite.texture = tex;
+    if (this.rope) {
+      this.rope.texture = tex;
+    } else {
+      this.sprite.texture = tex;
+    }
   }
 
   update() {
     this.directionTick++;
+    this.wiggleCount = (this.wiggleCount || 0) + (0.15 * this.speed);
+
+    // Apply sine wave to rope points for swimming animation
+    if (this.points && this.rope.texture.valid && this.rope.texture.width > 1) {
+      const texWidth = this.rope.texture.width;
+      this.rope.x = -texWidth / 2; // Keep centered dynamically
+      
+      for (let i = 0; i < this.points.length; i++) {
+        // Fix squishing by mapping x to actual texture width
+        this.points[i].x = i * texWidth / (this.points.length - 1);
+        
+        // The fish textures natively face RIGHT, meaning the head is at the right (larger i)
+        // and the tail is at the left (i=0).
+        // Calculate distance from head (0 = head, 1 = tail)
+        const distFromHead = (this.points.length - 1 - i) / (this.points.length - 1);
+        
+        // Only wiggle the back 20% of the fish
+        let factor = 0;
+        if (distFromHead > 0.7) {
+          factor = (distFromHead - 0.7) / 0.3; // Ramps from 0 to 1 over the last 30%
+          factor = Math.pow(factor, 2); // Smooth exponential curve
+        }
+
+        this.points[i].y = Math.sin(this.wiggleCount - i * 0.5) * 15 * factor;
+      }
+    }
 
     // --- FEED STATE ---
     if (this.state === 'feed') {
@@ -151,17 +204,18 @@ class Fish {
       if (!this.targetFood || !foods.includes(this.targetFood)) {
         this.returnToMove();
       } else {
-        const dx = this.targetFood.body.position.x - this.body.position.x;
-        const dy = this.targetFood.body.position.y - this.body.position.y;
+        const mouthPos = this.getMouthPosition();
+        const dx = this.targetFood.body.position.x - mouthPos.x;
+        const dy = this.targetFood.body.position.y - mouthPos.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        if (dist < 15) {
+        if (dist < 30) {
           // Close enough, eat it
           this.targetFood.destroy();
           this.returnToMove();
         } else {
-          // Move toward food at a moderate chase speed (not instant)
-          const chaseSpeed = this.speed * 1.5;
+          // Move toward food at a slower, moderate chase speed
+          const chaseSpeed = this.speed * 1.2;
           this.vx = (dx / dist) * chaseSpeed;
           this.vy = (dy / dist) * chaseSpeed;
         }
@@ -227,14 +281,27 @@ class Fish {
     this.sprite.y = this.body.position.y;
 
     // Smooth paper-flip animation
-    // Fish always faces the direction it is moving (positive vx = face right)
-    const targetScaleX = this.vx > 0 ? this.baseScale : -this.baseScale;
+    // Fish natively faces RIGHT. Moving right (positive vx) uses a positive scale.
+    // Prevent squishing into a line by only updating target direction if horizontal velocity is significant
+    let targetScaleX = this.currentScaleX > 0 ? this.baseScale : -this.baseScale;
+    if (Math.abs(this.vx) > 0.1) {
+      targetScaleX = this.vx > 0 ? this.baseScale : -this.baseScale;
+    }
     this.currentScaleX += (targetScaleX - this.currentScaleX) * 0.08;
     this.sprite.scale.x = this.currentScaleX;
 
-    // Prevent backward movement: ensure vx sign matches the facing direction
+    // Add realistic pitch rotation based on velocity direction
+    const pitch = Math.atan2(this.vy, Math.max(0.2, Math.abs(this.vx)));
+    // If facing left (negative scale), we invert pitch so the nose still points correctly
+    const targetRotation = this.currentScaleX > 0 ? pitch : -pitch;
+    this.sprite.rotation += (targetRotation - this.sprite.rotation) * 0.1;
+
+    // Prevent backward movement: ensure visual facing direction matches movement
+    const isVisuallyFacingRight = this.currentScaleX > 0; 
+    const isMovingRight = this.vx > 0;
+    
     // If the flip hasn't completed yet (sprite still facing old direction), don't move
-    if (Math.sign(this.currentScaleX) !== Math.sign(this.vx) && this.state === 'move') {
+    if (isVisuallyFacingRight !== isMovingRight && this.state === 'move') {
       // Stall horizontal movement while flipping
       Matter.Body.setPosition(this.body, {
         x: this.body.position.x - this.vx * 0.7, // undo most of the horizontal move
@@ -320,13 +387,18 @@ Matter.Events.on(engine, 'collisionStart', (event) => {
       const fish = fishBody.plugin.fishInstance;
       const food = foodBody.plugin.foodInstance;
 
-      // Only destroy if it still exists in the array
-      if (foods.includes(food)) {
-        food.destroy();
-      }
+      const mouthPos = fish.getMouthPosition();
+      const dx = food.body.position.x - mouthPos.x;
+      const dy = food.body.position.y - mouthPos.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
 
-      // Return fish to move state
-      fish.returnToMove();
+      // Only eat if the food hits near the mouth
+      if (dist < 45) {
+        if (foods.includes(food)) {
+          food.destroy();
+        }
+        fish.returnToMove();
+      }
     }
   });
 });
