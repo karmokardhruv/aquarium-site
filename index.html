@@ -42,6 +42,37 @@
 
   <!-- PAGE CSS -->
   <link rel="stylesheet" href="css/index.css" />
+
+  <!-- SCRIPTS -->
+  <!-- Defer main.js to speed up parsing -->
+  <script src="main.js?v=2" defer></script>
+
+  <!-- JSON-LD Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Dhruv Karmokar",
+    "url": "https://karmokardhruv.me/",
+    "image": "https://karmokardhruv.me/images/dhruv-logo.png",
+    "sameAs": [
+      "https://www.linkedin.com/in/karmokardhruv",
+      "https://github.com/karmokardhruv",
+      "https://x.com/karmokardhruv",
+      "https://instagram.com/karmokardhruv",
+      "https://www.youtube.com/@karmokardhruv"
+    ],
+    "jobTitle": "ASE",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "TCS"
+    },
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "VIT Chennai"
+    }
+  }
+  </script>
 </head>
 
 <body>
@@ -106,8 +137,6 @@
     <div class="footer-copy">Copyright © 2026 Dhruv Karmokar. All rights reserved</div>
   </footer>
 
-  <!-- Load main.js for hamburger nav -->
-  <script src="main.js?v=2"></script>
   <!-- Load Aquarium Logic -->
   <script type="module" src="aquarium.js"></script>
 
