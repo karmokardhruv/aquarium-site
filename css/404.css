@@ -1,0 +1,82 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #000;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.48);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.error-container,
+.site-footer-bottom {
+  position: relative;
+  z-index: 1;
+}
+
+.site-footer-bottom {
+  background-color: rgba(0, 0, 0, 0.55) !important;
+  backdrop-filter: blur(10px);
+}
+
+.error-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: clamp(56px, 10vw, 120px) 20px;
+}
+
+.error-message {
+  max-width: 640px;
+  color: #fff;
+}
+
+.error-message h1 {
+  font-size: clamp(2.25rem, 7vw, 3.7rem);
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.error-message p {
+  font-size: 1.15rem;
+  max-width: 560px;
+  line-height: 1.7;
+  color: #ddd;
+}
+
+@media (max-width: 767px) {
+  .error-container {
+    padding: 48px 18px;
+  }
+
+  .error-message p {
+    font-size: 1rem;
+  }
+}
+
+/* Error GIF Backgrounds (toggled via JS class) */
+.error-bg-1  { background-image: url('../gifs/error1.gif'); }
+.error-bg-2  { background-image: url('../gifs/error2.gif'); }
+.error-bg-3  { background-image: url('../gifs/error3.gif'); }
+.error-bg-4  { background-image: url('../gifs/error4.gif'); }
+.error-bg-5  { background-image: url('../gifs/error5.gif'); }
+.error-bg-6  { background-image: url('../gifs/error6.gif'); }
+.error-bg-7  { background-image: url('../gifs/error7.gif'); }
+.error-bg-8  { background-image: url('../gifs/error8.gif'); }
+.error-bg-9  { background-image: url('../gifs/error9.gif'); }
+.error-bg-10 { background-image: url('../gifs/error10.gif'); }
+.error-bg-11 { background-image: url('../gifs/error11.gif'); }
+.error-bg-12 { background-image: url('../gifs/error12.gif'); }
+.error-bg-13 { background-image: url('../gifs/error13.gif'); }

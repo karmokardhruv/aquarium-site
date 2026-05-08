@@ -3,7 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; media-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; connect-src 'self' https://formspree.io;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="no-referrer-when-downgrade">
   <title>Projects | Dhruv Karmokar</title>
+  <meta name="description" content="Projects by Dhruv Karmokar — AR visualization, computer vision, and deep learning.">
+  <link rel="canonical" href="https://karmokardhruv.me/projects.html">
+  <meta property="og:title" content="Projects — Dhruv Karmokar">
+  <meta property="og:description" content="A curation of hands-on work in machine learning, spatial computing, and computer vision.">
+  <meta property="og:url" content="https://karmokardhruv.me/projects.html">
+  <meta property="og:image" content="https://karmokardhruv.me/images/dhruv-logo.png">
+  <meta name="twitter:card" content="summary">
 
   <!-- ====== FAVICON ====== -->
   <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
@@ -12,100 +24,22 @@
   <link rel="shortcut icon" href="favicon_io/favicon.ico" type="image/x-icon">
   <link rel="manifest" href="favicon_io/site.webmanifest">
 
-  <!-- FONT-FACE: Product Sans -->
-  <style>
-    @font-face { font-family: "Product Sans"; src: url("fonts/Product Sans Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
-    @font-face { font-family: "Product Sans"; src: url("fonts/Product Sans Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
-    @font-face { font-family: "Product Sans"; src: url("fonts/Product Sans Italic.ttf") format("truetype"); font-weight: 400; font-style: italic; font-display: swap; }
-  </style>
-
   <!-- MAIN CSS -->
   <link rel="stylesheet" href="styles.css" />
 
   <!-- FONT AWESOME -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <style>
-    /* Theme overrides for Projects Page */
-    body[data-theme="day"] {
-      background-color: #f5f5f7;
-      color: #111;
-    }
-    body[data-theme="day"] .projects-container h1 {
-      color: #111 !important;
-    }
-    
-    /* WIP Animation Styles */
-    @keyframes dig {
-      0% { transform: rotate(0deg) translateY(0); }
-      25% { transform: rotate(-25deg) translateY(-5px); }
-      50% { transform: rotate(10deg) translateY(2px); }
-      75% { transform: rotate(-15deg) translateY(-3px); }
-      100% { transform: rotate(0deg) translateY(0); }
-    }
-    
-    @keyframes fadeUpWip {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .wip-icon {
-      font-size: 5rem;
-      color: #bf81ff; /* Accent color */
-      animation: dig 1.5s infinite ease-in-out;
-      margin-bottom: 20px;
-      display: inline-block;
-      transition: color 0.4s ease;
-    }
-    
-    body[data-theme="day"] .wip-icon {
-      color: #7b2cbf;
-    }
-
-    .wip-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 70vh;
-      text-align: center;
-      padding: 20px;
-      animation: fadeUpWip 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    .wip-container h1 {
-      font-size: 3.5rem;
-      font-weight: 700;
-      margin-bottom: 15px;
-      transition: color 0.4s ease;
-    }
-
-    .wip-container .subtitle {
-      color: var(--text-secondary, #a1a1aa);
-      font-size: 1.25rem;
-      max-width: 650px;
-      line-height: 1.6;
-      font-style: italic;
-      transition: color 0.4s ease;
-    }
-    
-    body[data-theme="day"] .wip-container .subtitle {
-      color: #555555;
-    }
-  </style>
+  <!-- PAGE CSS -->
+  <link rel="stylesheet" href="css/projects.css" />
 </head>
 
 <body>
-  <script>
-    (function() {
-      var theme = localStorage.getItem('site-theme') || 'night';
-      document.body.setAttribute('data-theme', theme);
-    })();
-  </script>
+  <script src="theme-init.js"></script>
   <!-- =============== HEADER =============== -->
   <header class="site-header">
     <a href="index.html" class="logo">
-      <img src="images/dhruv-logo.png" alt="Dhruv Karmokar" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.marginLeft='0';"/>
+      <img src="images/dhruv-logo.png" alt="Dhruv Karmokar" class="logo-img"/>
       <span class="logo-text">Dhruv Karmokar</span>
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation menu">
@@ -126,7 +60,7 @@
   </header>
 
   <!-- =============== FLOATING THEME TOGGLE =============== -->
-  <button id="theme-btn" class="float-btn top-right" onclick="window.toggleTheme()" title="Toggle Day/Night">
+  <button id="theme-btn" class="float-btn top-right" title="Toggle Day/Night">
     <i id="theme-icon" class="fa-solid fa-moon"></i>
   </button>
 
@@ -142,19 +76,19 @@
 
 <footer class="site-footer-bottom">
   <div class="footer-icons">
-    <a href="https://www.linkedin.com/in/karmokardhruv" target="_blank" aria-label="LinkedIn Profile">
+    <a href="https://www.linkedin.com/in/karmokardhruv" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
       <i class="fa-brands fa-linkedin"></i>
     </a>
-    <a href="https://github.com/karmokardhruv" target="_blank" aria-label="GitHub Profile">
+    <a href="https://github.com/karmokardhruv" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
       <i class="fa-brands fa-github"></i>
     </a>
-    <a href="https://x.com/karmokardhruv" target="_blank" aria-label="X (Twitter) Profile">
+    <a href="https://x.com/karmokardhruv" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter) Profile">
       <i class="fa-brands fa-x-twitter"></i>
     </a>
-    <a href="https://instagram.com/karmokardhruv" target="_blank" aria-label="Instagram Profile">
+    <a href="https://instagram.com/karmokardhruv" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile">
       <i class="fa-brands fa-instagram"></i>
     </a>
-    <a href="https://www.youtube.com/@karmokardhruv" target="_blank" aria-label="YouTube Channel">
+    <a href="https://www.youtube.com/@karmokardhruv" target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel">
       <i class="fa-brands fa-youtube"></i>
     </a>
   </div>
@@ -163,25 +97,6 @@
 
   <script src="main.js?v=2"></script>
   
-  <script>
-    // Witty Text Randomizer
-    document.addEventListener("DOMContentLoaded", () => {
-      const wittyLines = [
-        "Projects are currently marinating. Good things take time, and a lot of Stack Overflow.",
-        "Currently fine-tuning the physics of a virtual fish tank. Real projects will surface once the fish are fed.",
-        "Rome wasn't built in a day, and neither is this page. Mostly because I spent 4 hours choosing a font.",
-        "404: Masterpieces not found... yet. The hamsters powering my servers are currently on a union break.",
-        "Cooking up some code. Warning: May contain traces of spaghetti and misplaced semicolons.",
-        "I'm currently busy breaking things locally before I push them to production. Stay tuned.",
-        "Battling a rogue CSS flexbox. If I survive, the projects will appear here soon."
-      ];
-
-      const randomLine = wittyLines[Math.floor(Math.random() * wittyLines.length)];
-      const textEl = document.getElementById("witty-text");
-      if (textEl) {
-        textEl.textContent = `"${randomLine}"`;
-      }
-    });
-  </script>
+  <script src="projects.js" defer></script>
 </body>
 </html>

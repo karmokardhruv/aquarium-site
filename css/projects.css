@@ -1,0 +1,111 @@
+/* Theme overrides for Projects Page */
+body[data-theme="day"] {
+  background-color: #f5f5f7;
+  color: #111;
+}
+body[data-theme="day"] .projects-container h1 {
+  color: #111 !important;
+}
+
+/* WIP Animation Styles (from projects.html) */
+@keyframes dig {
+  0% { transform: rotate(0deg) translateY(0); }
+  25% { transform: rotate(-25deg) translateY(-5px); }
+  50% { transform: rotate(10deg) translateY(2px); }
+  75% { transform: rotate(-15deg) translateY(-3px); }
+  100% { transform: rotate(0deg) translateY(0); }
+}
+
+@keyframes fadeUpWip {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.wip-icon {
+  font-size: 5rem;
+  color: #bf81ff; /* Accent color */
+  animation: dig 1.5s infinite ease-in-out;
+  margin-bottom: 20px;
+  display: inline-block;
+  transition: color 0.4s ease;
+}
+
+body[data-theme="day"] .wip-icon {
+  color: #7b2cbf;
+}
+
+.wip-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  text-align: center;
+  padding: 20px;
+  animation: fadeUpWip 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.wip-container h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  transition: color 0.4s ease;
+}
+
+.wip-container .subtitle {
+  color: var(--text-secondary, #a1a1aa);
+  font-size: 1.25rem;
+  max-width: 650px;
+  line-height: 1.6;
+  font-style: italic;
+  transition: color 0.4s ease;
+}
+
+body[data-theme="day"] .wip-container .subtitle {
+  color: #555555;
+}
+
+/* Bento Grid Styles (from projects-hide.html) */
+body[data-theme="day"] .card-title {
+  color: #111 !important;
+}
+body[data-theme="day"] .card-desc {
+  color: #444 !important;
+}
+body[data-theme="day"] .tag {
+  background: rgba(0, 0, 0, 0.05) !important;
+  color: #333 !important;
+}
+body[data-theme="day"] .tag-cv {
+  background: rgba(191, 129, 255, 0.2) !important;
+  color: #7b2cbf !important;
+}
+body[data-theme="day"] .tag-dl {
+  background: rgba(50, 50, 50, 0.1) !important;
+  color: #222 !important;
+}
+body[data-theme="day"] .tech-stack span {
+  background: #eee !important;
+  color: #444 !important;
+  border-color: #ddd !important;
+}
+
+/* --- Mobile --- */
+@media (max-width: 767px) {
+  .wip-container {
+    min-height: 60vh;
+    padding: 16px;
+  }
+
+  .wip-icon {
+    font-size: 3.5rem;
+  }
+
+  .wip-container h1 {
+    font-size: 2.2rem;
+  }
+
+  .wip-container .subtitle {
+    font-size: 1rem;
+  }
+}

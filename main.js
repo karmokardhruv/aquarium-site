@@ -28,7 +28,7 @@
   // Apply immediately (body exists since script is at bottom)
   applyTheme(getSavedTheme());
 
-  // Global toggle function for onclick handlers and aquarium.js
+  // Global toggle function for aquarium.js and event listener
   window.toggleTheme = function () {
     const current = document.body.getAttribute("data-theme") || "night";
     const next = current === "day" ? "night" : "day";
@@ -40,7 +40,27 @@
       window._onThemeChange(next);
     }
   };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const themeBtn = document.getElementById("theme-btn");
+    if (themeBtn) {
+      themeBtn.addEventListener("click", window.toggleTheme);
+    }
+  });
 })();
+
+// ============================================
+// LOGO FALLBACK (replaces inline onerror)
+// ============================================
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".logo-img").forEach((img) => {
+    img.addEventListener("error", () => {
+      img.style.display = "none";
+      const next = img.nextElementSibling;
+      if (next) next.style.marginLeft = "0";
+    });
+  });
+});
 
 // ============================================
 // HAMBURGER NAV TOGGLE (mobile)

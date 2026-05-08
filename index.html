@@ -3,7 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https: blob:; media-src 'self'; script-src 'self' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; connect-src 'self' https://formspree.io; worker-src 'self' blob:;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="no-referrer-when-downgrade">
   <title>Dhruv Karmokar</title>
+  <meta name="description" content="Dhruv Karmokar — Software Engineer, AI Researcher, and Full-Stack Developer. Explore the interactive aquarium portfolio.">
+  <link rel="canonical" href="https://karmokardhruv.me/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Dhruv Karmokar — Portfolio">
+  <meta property="og:description" content="Software Engineer, AI Researcher, and Full-Stack Developer. Explore the interactive aquarium portfolio.">
+  <meta property="og:url" content="https://karmokardhruv.me/">
+  <meta property="og:image" content="https://karmokardhruv.me/images/dhruv-logo.png">
+  <meta name="twitter:card" content="summary">
 
   <!-- ====== FAVICON ====== -->
 <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
@@ -12,26 +27,8 @@
 <link rel="shortcut icon" href="favicon_io/favicon.ico" type="image/x-icon">
 <link rel="manifest" href="favicon_io/site.webmanifest">
 
-  <!-- 1) FONT‐FACE: Product Sans (self‐hosted) -->
-  <style>
-    @font-face {
-      font-family: "Product Sans";
-      src: url("fonts/Product Sans Regular.ttf") format("truetype");
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
 
-    @font-face {
-      font-family: "Product Sans";
-      src: url("fonts/Product Sans Bold.ttf") format("truetype");
-      font-weight: 700;
-      font-style: normal;
-      font-display: swap;
-    }
-  </style>
-
-  <!-- 2) LINK MAIN CSS -->
+  <!-- MAIN CSS -->
   <link rel="stylesheet" href="styles.css" />
 
   <!-- 3) FONT AWESOME (for LinkedIn & GitHub icons) -->
@@ -43,33 +40,16 @@
     referrerpolicy="no-referrer"
   />
 
-  <!-- 4) BRAND HOVER COLORS (Index Only) -->
-  <style>
-    /* Dark mode (default) */
-    .aquarium-footer .footer-icons a:hover .fa-linkedin { color: #0077b5 !important; }
-    .aquarium-footer .footer-icons a:hover .fa-github { color: #8a4baf !important; }
-    .aquarium-footer .footer-icons a:hover .fa-x-twitter { color: #ffffff !important; }
-    .aquarium-footer .footer-icons a:hover .fa-instagram { color: #E1306C !important; }
-    .aquarium-footer .footer-icons a:hover .fa-youtube { color: #ff0000 !important; }
-
-    /* Light mode */
-    body[data-theme="day"] .aquarium-footer .footer-icons a:hover .fa-x-twitter {
-      color: #000000 !important;
-    }
-  </style>
+  <!-- PAGE CSS -->
+  <link rel="stylesheet" href="css/index.css" />
 </head>
 
 <body>
-  <script>
-    (function() {
-      var theme = localStorage.getItem('site-theme') || 'night';
-      document.body.setAttribute('data-theme', theme);
-    })();
-  </script>
+  <script src="theme-init.js"></script>
   <!-- =============== HEADER =============== -->
   <header class="site-header">
     <a href="index.html" class="logo">
-      <img src="images/dhruv-logo.png" alt="Dhruv Karmokar" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.marginLeft='0';"/>
+      <img src="images/dhruv-logo.png" alt="Dhruv Karmokar" class="logo-img"/>
       <span class="logo-text">Dhruv Karmokar</span>
     </a>
 
@@ -92,7 +72,7 @@
   </header>
 
   <!-- =============== FLOATING THEME TOGGLE =============== -->
-  <button id="theme-btn" class="float-btn top-right" onclick="window.toggleTheme()" title="Toggle Day/Night">
+  <button id="theme-btn" class="float-btn top-right" title="Toggle Day/Night">
     <i id="theme-icon" class="fa-solid fa-moon"></i>
   </button>
 
@@ -108,7 +88,7 @@
   <!-- =============== FLOATING UI =============== -->
 
   <div class="bottom-right-controls">
-    <button id="feed-btn" class="float-btn feed-btn" onclick="window.feedFish()" title="Feed Fish">
+    <button id="feed-btn" class="float-btn feed-btn" title="Feed Fish">
       <i class="fa-solid fa-fish"></i> Feed
     </button>
   </div>
@@ -117,11 +97,11 @@
   <div class="aquarium-footer-gradient"></div>
   <footer class="site-footer-bottom aquarium-footer">
     <div class="footer-icons">
-      <a href="https://www.linkedin.com/in/karmokardhruv" target="_blank" aria-label="LinkedIn Profile"><i class="fa-brands fa-linkedin"></i></a>
-      <a href="https://github.com/karmokardhruv" target="_blank" aria-label="GitHub Profile"><i class="fa-brands fa-github"></i></a>
-      <a href="https://x.com/karmokardhruv" target="_blank" aria-label="X (Twitter) Profile"><i class="fa-brands fa-x-twitter"></i></a>
-      <a href="https://instagram.com/karmokardhruv" target="_blank" aria-label="Instagram Profile"><i class="fa-brands fa-instagram"></i></a>
-      <a href="https://www.youtube.com/@karmokardhruv" target="_blank" aria-label="YouTube Channel"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://www.linkedin.com/in/karmokardhruv" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="https://github.com/karmokardhruv" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile"><i class="fa-brands fa-github"></i></a>
+      <a href="https://x.com/karmokardhruv" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter) Profile"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://instagram.com/karmokardhruv" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.youtube.com/@karmokardhruv" target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel"><i class="fa-brands fa-youtube"></i></a>
     </div>
     <div class="footer-copy">Copyright © 2026 Dhruv Karmokar. All rights reserved</div>
   </footer>

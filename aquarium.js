@@ -456,3 +456,10 @@ window.feedFish = function () {
     });
   }, 300);
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+  const feedBtn = document.getElementById('feed-btn');
+  if (feedBtn) {
+    feedBtn.addEventListener('click', window.feedFish);
+  }
+});

@@ -3,7 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; media-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; connect-src 'self' https://formspree.io;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="no-referrer-when-downgrade">
   <title>Publications | Dhruv Karmokar</title>
+  <meta name="description" content="Peer-reviewed publications by Dhruv Karmokar in cryptography, multimodal ML, and intelligent systems — IEEE, CRC Press.">
+  <link rel="canonical" href="https://karmokardhruv.me/publications.html">
+  <meta property="og:title" content="Publications — Dhruv Karmokar">
+  <meta property="og:description" content="Peer-reviewed research across cryptography, multimodal ML, and intelligent systems.">
+  <meta property="og:url" content="https://karmokardhruv.me/publications.html">
+  <meta property="og:image" content="https://karmokardhruv.me/images/dhruv-logo.png">
+  <meta name="twitter:card" content="summary">
 
   <!-- ====== FAVICON ====== -->
   <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
@@ -13,397 +25,22 @@
   <link rel="manifest" href="favicon_io/site.webmanifest">
 
   <!-- 1) FONT-FACE (Now includes Italic) -->
-  <style>
-    @font-face {
-      font-family: "Product Sans";
-      src: url("fonts/Product Sans Regular.ttf") format("truetype");
-      font-weight: 400; font-style: normal; font-display: swap;
-    }
-    @font-face {
-      font-family: "Product Sans";
-      src: url("fonts/Product Sans Bold.ttf") format("truetype");
-      font-weight: 700; font-style: normal; font-display: swap;
-    }
-    @font-face {
-      font-family: "Product Sans";
-      src: url("fonts/Product Sans Italic.ttf") format("truetype");
-      font-weight: 400; font-style: italic; font-display: swap;
-    }
-    @font-face {
-      font-family: "Space Grotesk";
-      src: url("fonts/SpaceGrotesk-Bold.ttf") format("truetype");
-      font-weight: 700; font-style: normal; font-display: swap;
-    }
-  </style>
-
-  <!-- 2) LINK MAIN CSS -->
+  <!-- MAIN CSS -->
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- 3) FONT AWESOME -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <!-- ================== PAGE-SPECIFIC CSS for PUBLICATIONS PAGE ================== -->
-  <style>
-    .publications-redesign {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 140px clamp(20px, 4vw, 32px) clamp(40px, 6vw, 64px);
-      color: #fff;
-    }
-
-    .pub-hero {
-      margin-bottom: 80px;
-    }
-
-    .pub-title {
-      font-size: clamp(3rem, 6vw, 4.5rem);
-      font-weight: 700;
-      margin-bottom: 20px;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-    }
-
-    .pub-title span {
-      color: #2a9d8f;
-      font-style: italic;
-    }
-
-    .pub-desc {
-      font-size: 1.1rem;
-      color: #adaaaa;
-      line-height: 1.6;
-      max-width: 700px;
-    }
-
-    .pub-desc a {
-      color: #34a0a4;
-      text-decoration: none;
-      font-weight: 700;
-      transition: color 0.3s ease;
-    }
-
-    .pub-desc a:hover {
-      color: #00e5ee;
-      text-decoration: underline;
-    }
-
-    /* Sections by year */
-    .pub-year-section {
-      margin-bottom: 60px;
-    }
-
-    .pub-year-header {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      margin-bottom: 40px;
-    }
-
-    .pub-year-text {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(3rem, 5vw, 5rem);
-      font-weight: 700;
-      color: #3d5567;
-      opacity: 0.8;
-      line-height: 1;
-      margin: 0;
-    }
-
-    .pub-year-line {
-      flex-grow: 1;
-      height: 1px;
-      background-color: rgba(73, 72, 71, 0.3);
-    }
-
-    .pub-year-label {
-      color: #8eff71;
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    /* Cards */
-    .pub-grid {
-      display: grid;
-      gap: 24px;
-      grid-template-columns: 1fr;
-    }
-
-    .pub-card {
-      background-color: #1a1a1a;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: clamp(24px, 4vw, 32px);
-      display: grid;
-      gap: 24px;
-      grid-template-columns: 1fr;
-      transition: all 0.3s ease;
-    }
-
-    @media (min-width: 800px) {
-      .pub-card {
-        grid-template-columns: 1fr auto;
-      }
-    }
-
-    .pub-card:hover {
-      border-color: rgba(161, 250, 255, 0.4);
-    }
-
-    .pub-card-left {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .pub-venue-badge {
-      font-size: 0.85rem;
-      color: #777575;
-      font-family: monospace;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 12px;
-    }
-
-    .pub-card-title {
-      font-size: 1.35rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      line-height: 1.4;
-      color: #fff;
-    }
-
-    .pub-card-venue {
-      font-size: 0.95rem;
-      color: #adaaaa;
-      font-style: italic;
-      margin-bottom: 12px;
-    }
-
-    .pub-card-authors {
-      font-size: 0.95rem;
-      color: #777575;
-      margin-bottom: 16px;
-      line-height: 1.5;
-    }
-
-    .pub-card-authors strong {
-      color: #fff;
-    }
-
-    .pub-card-right {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-    }
-
-    @media (min-width: 800px) {
-      .pub-card-right {
-        flex-direction: column;
-        align-items: flex-end;
-        justify-content: flex-start;
-      }
-    }
-
-    .pub-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: #ccc;
-      background-color: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      transition: all 0.2s ease;
-      cursor: pointer;
-      min-width: 100px;
-    }
-
-    .pub-btn:hover {
-      background-color: rgba(255, 255, 255, 0.05);
-      color: #fff;
-    }
-
-    .pub-btn.primary {
-      background-color: #fff;
-      color: #000;
-      border-color: #fff;
-    }
-
-    .pub-btn.primary:hover {
-      background-color: #e0e0e0;
-      border-color: #e0e0e0;
-      color: #000;
-    }
-
-    /* Abstract */
-    .pub-abstract-toggle {
-      background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 6px;
-      color: #ccc;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      margin-top: 4px;
-      transition: all 0.2s;
-    }
-
-    .pub-abstract-toggle:hover {
-      background-color: rgba(255, 255, 255, 0.05);
-      color: #fff;
-    }
-
-    .pub-abstract-content {
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      margin-top: 0;
-      padding: 0 16px;
-      background-color: #0e0e0e;
-      border-radius: 8px;
-      border: 1px solid transparent;
-      font-size: 0.9rem;
-      color: #adaaaa;
-      line-height: 1.6;
-      width: 100%;
-      transition: all 0.4s ease-in-out;
-    }
-
-    .pub-abstract-content.show {
-      max-height: 1500px;
-      opacity: 1;
-      margin-top: 16px;
-      padding: 16px;
-      border-color: rgba(73, 72, 71, 0.2);
-    }
-
-    .pub-footnote {
-      text-align: center;
-      color: #777575;
-      font-size: 0.85rem;
-      margin-top: 60px;
-    }
-
-    /* Day Mode Support */
-    body[data-theme="day"] .publications-redesign {
-      color: #111;
-    }
-    body[data-theme="day"] .pub-title,
-    body[data-theme="day"] .pub-title span {
-      color: #111;
-    }
-    body[data-theme="day"] .pub-title span {
-      color: #2a9d8f;
-    }
-    body[data-theme="day"] .pub-desc {
-      color: #555;
-    }
-    body[data-theme="day"] .pub-year-text {
-      color: #2c3e50;
-    }
-    body[data-theme="day"] .pub-year-line {
-      background-color: rgba(0, 0, 0, 0.15);
-    }
-    body[data-theme="day"] .pub-year-label {
-      color: #00875a;
-    }
-    body[data-theme="day"] .pub-card {
-      background-color: #fff;
-      border-color: #e0e0e0;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-    }
-    body[data-theme="day"] .pub-card:hover {
-      background-color: #fafafa;
-      border-color: rgba(42, 157, 143, 0.4);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-    }
-    body[data-theme="day"] .pub-venue-badge {
-      color: #666;
-    }
-    body[data-theme="day"] .pub-card-title {
-      color: #111;
-    }
-    body[data-theme="day"] .pub-card-venue {
-      color: #555;
-    }
-    body[data-theme="day"] .pub-card-authors {
-      color: #444;
-    }
-    body[data-theme="day"] .pub-card-authors strong {
-      color: #000;
-    }
-    body[data-theme="day"] .pub-btn {
-      background-color: transparent;
-      border-color: #888;
-      color: #333;
-    }
-    body[data-theme="day"] .pub-btn:hover {
-      background-color: rgba(0, 0, 0, 0.05);
-      border-color: #333;
-      color: #111;
-    }
-    body[data-theme="day"] .pub-btn.primary {
-      background-color: #1a2634;
-      color: #fff;
-      border-color: #1a2634;
-    }
-    body[data-theme="day"] .pub-btn.primary:hover {
-      background-color: #2a9d8f;
-      border-color: #2a9d8f;
-      color: #fff;
-    }
-    body[data-theme="day"] .pub-abstract-toggle {
-      border-color: #888;
-      color: #333;
-    }
-    body[data-theme="day"] .pub-abstract-toggle:hover {
-      background-color: rgba(0, 0, 0, 0.05);
-      border-color: #333;
-      color: #111;
-    }
-    body[data-theme="day"] .pub-abstract-content {
-      background-color: #f5f5f5;
-      border-color: transparent;
-      color: #444;
-    }
-    body[data-theme="day"] .pub-abstract-content.show {
-      border-color: #ddd;
-    }
-  </style>
+  <!-- PAGE CSS -->
+  <link rel="stylesheet" href="css/publications.css" />
 </head>
 
 <body>
-  <script>
-    (function() {
-      var theme = localStorage.getItem('site-theme') || 'night';
-      document.body.setAttribute('data-theme', theme);
-    })();
-  </script>
+  <script src="theme-init.js"></script>
   <!-- =============== HEADER =============== -->
   <header class="site-header">
     <a href="index.html" class="logo">
-      <img src="images/dhruv-logo.png" alt="Dhruv Karmokar" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.marginLeft='0';"/>
+      <img src="images/dhruv-logo.png" alt="Dhruv Karmokar" class="logo-img"/>
       <span class="logo-text">Dhruv Karmokar</span>
     </a>
 
@@ -426,7 +63,7 @@
   </header>
 
   <!-- =============== FLOATING THEME TOGGLE =============== -->
-  <button id="theme-btn" class="float-btn top-right" onclick="window.toggleTheme()" title="Toggle Day/Night">
+  <button id="theme-btn" class="float-btn top-right" title="Toggle Day/Night">
     <i id="theme-icon" class="fa-solid fa-moon"></i>
   </button>
 
@@ -436,7 +73,7 @@
     <header class="pub-hero">
       <h1 class="pub-title">Research <span>&amp;</span> Archive</h1>
       <p class="pub-desc">
-        Peer-reviewed research across cryptography, multimodal ML, and intelligent systems—spanning books, journals, and international conferences to build more secure digital infrastructure. View full profile on <a href="https://scholar.google.com/citations?user=qImi6RMAAAAJ&hl" target="_blank">Google Scholar</a>.
+        Peer-reviewed research across cryptography, multimodal ML, and intelligent systems—spanning books, journals, and international conferences to build more secure digital infrastructure. View full profile on <a href="https://scholar.google.com/citations?user=qImi6RMAAAAJ&hl" target="_blank" rel="noopener noreferrer">Google Scholar</a>.
       </p>
     </header>
 
@@ -458,7 +95,7 @@
             <p class="pub-card-authors">R Kumar, M Marimuthu, A Tamotia, <strong>DS Karmokar</strong>, P Revathi.</p>
             
             <!-- Add your abstract text here -->
-            <button class="pub-abstract-toggle" onclick="this.nextElementSibling.classList.toggle('show'); this.textContent = this.nextElementSibling.classList.contains('show') ? 'Abstract ↑' : 'Abstract ↓';">
+            <button class="pub-abstract-toggle">
               Abstract ↓
             </button>
             <div class="pub-abstract-content">
@@ -468,10 +105,10 @@
           </div>
 
           <div class="pub-card-right">
-            <a href="papers/10.1201-9781003650201-144.pdf" class="pub-btn primary" target="_blank">PDF</a>
-            <a href="https://doi.org/10.1201/9781003650201-144" class="pub-btn" target="_blank">SOURCE</a>
-            <a href="https://bit.ly/41XswYG" class="pub-btn" target="_blank">SCHOLAR</a>
-            <button class="pub-btn" onclick="navigator.clipboard.writeText(this.dataset.citation); const original = this.innerText; this.innerText = 'COPIED!'; setTimeout(() => this.innerText = original, 2000);" data-citation="@incollection{kumar2026secure,
+            <a href="papers/10.1201-9781003650201-144.pdf" class="pub-btn primary" target="_blank" rel="noopener noreferrer">PDF</a>
+            <a href="https://doi.org/10.1201/9781003650201-144" class="pub-btn" target="_blank" rel="noopener noreferrer">SOURCE</a>
+            <a href="https://bit.ly/41XswYG" class="pub-btn" target="_blank" rel="noopener noreferrer">SCHOLAR</a>
+            <button class="pub-btn" data-citation="@incollection{kumar2026secure,
   title={A secure cryptographic framework: Leveraging Fermat's two squares theorem and trigonometric transformations for enhanced encryption},
   author={Kumar, Ranjith and Marimuthu, M and Tamotia, Aryaman and Karmokar, Dhruv Shantu and Revathi, P},
   booktitle={Information and Communication Systems},
@@ -502,7 +139,7 @@
             <p class="pub-card-authors">A Tamotia*, <strong>DS Karmokar*</strong>, R Komal*, KK Nawas†, A Shahina, AN Khan.</p>
             
             <!-- Add your abstract text here -->
-            <button class="pub-abstract-toggle" onclick="this.nextElementSibling.classList.toggle('show'); this.textContent = this.nextElementSibling.classList.contains('show') ? 'Abstract ↑' : 'Abstract ↓';">
+            <button class="pub-abstract-toggle">
               Abstract ↓
             </button>
             <div class="pub-abstract-content">
@@ -512,10 +149,10 @@
           </div>
 
           <div class="pub-card-right">
-            <a href="papers/10.1109-ACCESS.2025.3569606.pdf" class="pub-btn primary" target="_blank">PDF</a>
-            <a href="https://doi.org/10.1109/ACCESS.2025.3569606" class="pub-btn" target="_blank">SOURCE</a>
-            <a href="https://bit.ly/4vJxupo" class="pub-btn" target="_blank">SCHOLAR</a>
-            <button class="pub-btn" onclick="navigator.clipboard.writeText(this.dataset.citation); const original = this.innerText; this.innerText = 'COPIED!'; setTimeout(() => this.innerText = original, 2000);" data-citation="@ARTICLE{11003144,
+            <a href="papers/10.1109-ACCESS.2025.3569606.pdf" class="pub-btn primary" target="_blank" rel="noopener noreferrer">PDF</a>
+            <a href="https://doi.org/10.1109/ACCESS.2025.3569606" class="pub-btn" target="_blank" rel="noopener noreferrer">SOURCE</a>
+            <a href="https://bit.ly/4vJxupo" class="pub-btn" target="_blank" rel="noopener noreferrer">SCHOLAR</a>
+            <button class="pub-btn" data-citation="@ARTICLE{11003144,
   author={Tamotia, Aryaman and Karmokar, Dhruv Shantu and Komal, Rethi and Nawas, K. Khadar and Shahina, A. and Khan, A. Nayeemulla},
   journal={IEEE Access}, 
   title={Fusion of Multimodal Audio Data for Enhanced Speaker Identification Using Kolmogorov-Arnold Networks}, 
@@ -549,7 +186,7 @@
             <p class="pub-card-authors">AS Alphonse†, C Gupta, MK Warsi, <strong>KD Shantu*</strong>, A Tamotia*.</p>
             
             <!-- Add your abstract text here -->
-            <button class="pub-abstract-toggle" onclick="this.nextElementSibling.classList.toggle('show'); this.textContent = this.nextElementSibling.classList.contains('show') ? 'Abstract ↑' : 'Abstract ↓';">
+            <button class="pub-abstract-toggle">
               Abstract ↓
             </button>
             <div class="pub-abstract-content">
@@ -559,9 +196,9 @@
           </div>
 
           <div class="pub-card-right">
-            <a href="https://doi.org/10.1109/i-PACT58649.2023.10434693" class="pub-btn" target="_blank">SOURCE</a>
-            <a href="https://bit.ly/4ucbPEO" class="pub-btn" target="_blank">SCHOLAR</a>
-            <button class="pub-btn" onclick="navigator.clipboard.writeText(this.dataset.citation); const original = this.innerText; this.innerText = 'COPIED!'; setTimeout(() => this.innerText = original, 2000);" data-citation="@INPROCEEDINGS{10434693,
+            <a href="https://doi.org/10.1109/i-PACT58649.2023.10434693" class="pub-btn" target="_blank" rel="noopener noreferrer">SOURCE</a>
+            <a href="https://bit.ly/4ucbPEO" class="pub-btn" target="_blank" rel="noopener noreferrer">SCHOLAR</a>
+            <button class="pub-btn" data-citation="@INPROCEEDINGS{10434693,
   author={Alphonse, A. Sherly and Gupta, Chitranshu and Kamran Warsi, Mohammad and Shantu, Karmokar Dhruv and Tamotia, Aryaman},
   booktitle={2023 Innovations in Power and Advanced Computing Technologies (i-PACT)}, 
   title={Facilitating Fingerprint-Based Door Automation System Using RFID and Bluetooth}, 
@@ -583,19 +220,19 @@
 <footer class="site-footer-bottom">
   <!-- A div to group the icons -->
   <div class="footer-icons">
-    <a href="https://www.linkedin.com/in/karmokardhruv" target="_blank" aria-label="LinkedIn Profile">
+    <a href="https://www.linkedin.com/in/karmokardhruv" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
       <i class="fa-brands fa-linkedin"></i>
     </a>
-    <a href="https://github.com/karmokardhruv" target="_blank" aria-label="GitHub Profile">
+    <a href="https://github.com/karmokardhruv" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
       <i class="fa-brands fa-github"></i>
     </a>
-    <a href="https://x.com/karmokardhruv" target="_blank" aria-label="X (Twitter) Profile">
+    <a href="https://x.com/karmokardhruv" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter) Profile">
       <i class="fa-brands fa-x-twitter"></i>
     </a>
-    <a href="https://instagram.com/karmokardhruv" target="_blank" aria-label="Instagram Profile">
+    <a href="https://instagram.com/karmokardhruv" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile">
       <i class="fa-brands fa-instagram"></i>
     </a>
-    <a href="https://www.youtube.com/@karmokardhruv" target="_blank" aria-label="YouTube Channel">
+    <a href="https://www.youtube.com/@karmokardhruv" target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel">
       <i class="fa-brands fa-youtube"></i>
     </a>
   </div>
@@ -604,5 +241,6 @@
 </footer>
 
   <script src="main.js?v=2"></script>
+  <script src="publications.js" defer></script>
 </body>
 </html>
