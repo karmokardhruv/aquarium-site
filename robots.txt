@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /cdn-cgi/
 
 Sitemap: https://karmokardhruv.me/sitemap.xml
+

@@ -157,6 +157,7 @@
   color: #34a0a4; /* Teal accent */
   font-size: 0.95rem;
   font-weight: 700;
+  line-height: 1.35;
 }
 
 .education-header {
@@ -244,9 +245,49 @@
 .cert-item {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 16px;
   color: #ccc;
   font-size: 0.95rem;
+}
+
+.cert-name {
+  flex: 1;
+  min-width: 0;
+  line-height: 1.4;
+}
+
+.cert-credential-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.04);
+  color: #f0f0f0;
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  margin-left: auto;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+
+.cert-credential-btn i {
+  font-size: 0.75rem;
+  transition: transform 0.2s ease;
+}
+
+.cert-credential-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #34a0a4;
+  color: #34a0a4;
+  transform: translateY(-1px);
+}
+
+.cert-credential-btn:hover i {
+  transform: translate(1px, -1px);
 }
 
 .pill-list {
@@ -339,6 +380,16 @@ body[data-theme="day"] .cert-item,
 body[data-theme="day"] .language-list li {
   color: #333;
 }
+body[data-theme="day"] .cert-credential-btn {
+  border-color: #ccc;
+  background: #f5f5f7;
+  color: #222;
+}
+body[data-theme="day"] .cert-credential-btn:hover {
+  background: #e9e9ed;
+  border-color: #2a9d8f;
+  color: #2a9d8f;
+}
 body[data-theme="day"] .language-list span {
   color: #666;
 }
@@ -385,5 +436,18 @@ body[data-theme="day"] .language-list span {
   .education-header {
     flex-direction: column;
     gap: 8px;
+  }
+}
+
+@media (max-width: 680px) {
+  .cert-item {
+    flex-wrap: wrap;
+    gap: 8px 15px;
+  }
+  .cert-name {
+    flex: 1 1 calc(100% - 65px);
+  }
+  .cert-credential-btn {
+    margin-left: 65px;
   }
 }
